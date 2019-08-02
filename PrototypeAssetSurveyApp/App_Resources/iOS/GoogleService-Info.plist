@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>764161429996-rlpgv99sss0pm6r6q06mb7ma8h0vtj9q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.764161429996-rlpgv99sss0pm6r6q06mb7ma8h0vtj9q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB1eY6WYgYwbAKERCxRzHkSL-o0KMsFM5g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>764161429996</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.nativescript.PrototypeAssetSurveyApp</string>
+	<key>PROJECT_ID</key>
+	<string>prototypeassetsurveyapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>prototypeassetsurveyapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:764161429996:ios:e7c3e44d77b85b29</string>
+	<key>DATABASE_URL</key>
+	<string>https://prototypeassetsurveyapp.firebaseio.com</string>
+</dict>
+</plist>

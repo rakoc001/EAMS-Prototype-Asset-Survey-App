@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "764161429996",
+    "firebase_url": "https://prototypeassetsurveyapp.firebaseio.com",
+    "project_id": "prototypeassetsurveyapp",
+    "storage_bucket": "prototypeassetsurveyapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764161429996:android:e7c3e44d77b85b29",
+        "android_client_info": {
+          "package_name": "org.nativescript.PrototypeAssetSurveyApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764161429996-r9i8a4rktj75fn5bqfodeeakhsj1f1v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB4XtKS73HT9ujjjwSEKxhxhLKXwV6MmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764161429996-r9i8a4rktj75fn5bqfodeeakhsj1f1v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "764161429996-rlpgv99sss0pm6r6q06mb7ma8h0vtj9q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nativescript.PrototypeAssetSurveyApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
