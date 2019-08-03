@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
-import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransation } from "nativescript-ui-sidedrawer";
+import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
@@ -20,9 +20,9 @@ export class AppComponent implements OnInit{
         // User the component constructor to inject services.
     }
 
-    ngOnInit(): void {
-        this.activatedUrl = "/home"; // This may need to be /LoginComponent
-        this._sideDrawerTransition = new SlideInOnTopTransation();
+    ngOnInit() {
+        this._activatedUrl = "/home"; // This may need to be /LoginComponent
+        this._sideDrawerTransition = new SlideInOnTopTransition();
 
         firebase.init({
             // Optionally pass in properties for database, authentication and
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
     }
 
     isComponentSelected(url: string): boolean {
-        return this.activatedUrl == url;
+        return this._activatedUrl == url;
     }
 
     onNavItemTap(navItemRoute: string): void {

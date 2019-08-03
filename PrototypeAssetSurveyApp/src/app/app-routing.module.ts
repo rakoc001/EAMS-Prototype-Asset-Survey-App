@@ -6,8 +6,8 @@ import { LoginComponent } from "../login/login.component";
 import { HomeComponent } from "./home/home.component";
 
 export const routes: Routes = [
-    { path: "", /*redirectTo: "/home", pathMatch: "full"*/ component: LoginComponent },
-    { path: "home", /*loadChildren: "~/app/home/home.module#HomeModule"*/ component: HomeComponent }
+    { path: "", component: LoginComponent },
+    { path: "home",  component: HomeComponent }
 ];
 
 export const navigatableComponents = [
