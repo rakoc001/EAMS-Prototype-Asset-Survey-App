@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import { Observable, throwError } from "rxjs";
-import {catchError, map, tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 
 import { User } from "./user.model";
 import { Config } from "../config";
@@ -53,7 +53,7 @@ export class UserService {
     }
 
     handleErrors(error: Response) {
-        consol.log(JSON.stringify(error.json()));
+        console.log(JSON.stringify(error.json()));
         return Observable.throw(error);
     }
 }

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
     private _sideDrawerTransition: DrawerTransitionBase;
 
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
-        // User the component constructor to inject services.
+        // Use the component constructor to inject services.
     }
 
     ngOnInit() {
