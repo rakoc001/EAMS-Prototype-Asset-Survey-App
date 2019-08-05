@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1093337461698",
+    "firebase_url": "https://prototypeassetsurveyappdrawer.firebaseio.com",
+    "project_id": "prototypeassetsurveyappdrawer",
+    "storage_bucket": "prototypeassetsurveyappdrawer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093337461698:android:f81113112c1105be",
+        "android_client_info": {
+          "package_name": "org.nativescript.PrototypeAssetSurveyAppDrawer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093337461698-6sd5cc1nmtabcqb20fvh37j190povfue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLYY2DnJjC8bmtYFhLiFm1prJheOJuFis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093337461698-6sd5cc1nmtabcqb20fvh37j190povfue.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1093337461698-spgrhbagrl6meguqtp4f7phcl4oup67r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nativescript.PrototypeAssetSurveyAppDrawer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
