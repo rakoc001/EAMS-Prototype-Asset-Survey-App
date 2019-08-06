@@ -4,6 +4,11 @@
 .fa {
     font-family: "FontAwesome";
 }
+
+.Roboto {
+    font-family: "Roboto", sans-serif;
+}
+
 // Common page class
 .page-content {
     .page-placeholder {
@@ -89,21 +94,44 @@ $sidedrawer-list-icon-size: 20;
     }
 }
 
-// Login Page custom styles
-
+// Login page styles
 .login {
-    color: black;
-    .form {
-        .input {
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-image: url("./images/background.jpg");
 
-        }
-        .btn {
+    .form{
+        width: 300;
+        padding: 10 16;
+        background-color: $background-light;
+
+        .image {
+            margin-bottom: 20;
+            height: 70;
+        } // close .image class
+
+        .input {
+            .input-border {
+                placeholder-color: #C4AFB4;
+                color: $text-color;
+            } // close .input-border class
+        } // close .input class
+
+        .btn{
+            align-items: center;
             .btn-primary {
                 background-color: $btn-color;
-            }
-            .btn-secondary {
+                margin-left: 0;
+            } // close .btn-primary class
+            .btn-secondary{
                 background-color: $btn-color-secondary;
+                margin-left: 0;
             }
-        }
-    }
-}
+        }// close .btn class
+    } // close .form class
+
+
+
+
+} // close .login class

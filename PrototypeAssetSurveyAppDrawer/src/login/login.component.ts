@@ -8,8 +8,7 @@ import { Page } from "tns-core-modules/ui/page";
     selector: "gr-login",
     providers: [UserService],
     moduleId: module.id,
-    templateUrl: "./login.component.html"/*,
-    styleUrls: ["../_app-common.scss"]*/
+    templateUrl: "./login.component.html"
 })
 export class LoginComponent implements OnInit {
     /*name: string;
