@@ -88,3 +88,22 @@ $sidedrawer-list-icon-size: 20;
         }
     }
 }
+
+// Login Page custom styles
+
+.login {
+    color: black;
+    .form {
+        .input {
+
+        }
+        .btn {
+            .btn-primary {
+                background-color: $btn-color;
+            }
+            .btn-secondary {
+                background-color: $btn-color-secondary;
+            }
+        }
+    }
+}
