@@ -1,6 +1,14 @@
-<ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Home"></Label>
-</ActionBar>
+<FlexboxLayout class="login">
+    <StackLayout class="form" [class.dark]="!isLoggingIn">
+        <Image class="image" src="~/images/logo.png"></Image>
 
-<StackLayout class="page">
-</StackLayout>
+        <TextField hint="Email Address" keyboardType="email" autocorrect="false"
+            autocapitalizationType="none" [(ngModel)]="user.email" class="input input-border"></TextField>
+        <TextField hint="Password" secure="true" [(ngModel)]="user.password"
+            class="input input-border"></TextField>
+
+        <Button [text]="isLoggingIn ? 'Sign in' : 'Sign up'" class="btn btn-primary"
+            (tap)="submit()"></Button>
+        <Button class="btn btn-secondary" [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>
+    </StackLayout>
+</FlexboxLayout>
