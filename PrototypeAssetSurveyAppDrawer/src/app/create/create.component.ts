@@ -12,7 +12,7 @@ import { Component, OnInit } from "@angular/core";
     moduleId: module.id,
     templateUrl: "./create.component.html"
 })
-export class CreateComponent implements OnInit {
+export class CreateNewComponent implements OnInit {
     constructor() {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.

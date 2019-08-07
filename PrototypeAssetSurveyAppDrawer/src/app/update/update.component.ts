@@ -12,7 +12,7 @@ import { Component, OnInit } from "@angular/core";
     moduleId: module.id,
     templateUrl: "./update.component.html"
 })
-export class UpdateComponent implements OnInit {
+export class UpdateDeleteComponent implements OnInit {
     constructor() {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
