@@ -10,7 +10,7 @@ https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawe
             <Label class="sidedrawer-header-brand" text="User Name"></Label>
             <Label class="footnote" text="username@mail.com"></Label>
         </StackLayout>
-    
+
         <ScrollView row="1" class="sidedrawer-content">
             <StackLayout>
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/home')" (tap)="onNavItemTap('/home')">
@@ -18,9 +18,19 @@ https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawe
                     <Label col="1" text="Home" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/browse')" (tap)="onNavItemTap('/browse')">
-                    <Label col="0" text="&#xf1ea;" class="fa"></Label>
-                    <Label col="1" text="Browse" class="p-r-10"></Label>
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/create')" (tap)="onNavItemTap('/create')">
+                    <Label col="0" text="&#xf067;" class="fa"></Label>
+                    <Label col="1" text="Create New Asset" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/update')" (tap)="onNavItemTap('/update')">
+                    <Label col="0" text="&#xf1c0;" class="fa"></Label>
+                    <Label col="1" text="Update/Delete Existing Asset" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/reports')" (tap)="onNavItemTap('/reports')">
+                    <Label col="0" text="&#xf70e;" class="fa"></Label>
+                    <Label col="1" text="Create/View Asset Reports" class="p-r-10"></Label>
                 </GridLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/search')" (tap)="onNavItemTap('/search')">
@@ -28,11 +38,6 @@ https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawe
                     <Label col="1" text="Search" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/featured')" (tap)="onNavItemTap('/featured')">
-                    <Label col="0" text="&#xf005;" class="fa"></Label>
-                    <Label col="1" text="Featured" class="p-r-10"></Label>
-                </GridLayout>
-    
                 <StackLayout class="hr-light"></StackLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/settings')" (tap)="onNavItemTap('/settings')">
