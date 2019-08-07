@@ -1,10 +1,10 @@
 <ActionBar class="action-bar">
-    <!-- 
+    <!--
     Use the NavigationButton as a side-drawer button in Android
     because ActionItems are shown on the right side of the ActionBar
     -->
     <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <!-- 
+    <!--
     Use the ActionItem for IOS with position set to left. Using the
     NavigationButton as a side-drawer button in iOS is not possible,
     because its function is to always navigate back in the application.
@@ -15,7 +15,29 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
+<!-- <GridLayout class="page page-content">
     <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+    <Label class="page-placeholder" text=""></Label>
+</GridLayout> -->
+<GridLayout rows="auto, *">
+    <RadListView row="1">
+        <GridLayout columns="*, auto">
+            <Button text="Create Entry" class="btn btn-primary" (tap)="createEntry()"></Button>
+        </GridLayout>
+    </RadListView>
+    <RadListView row="2">
+        <GridLayout columns="*, auto">
+            <Button text="Update/Delete Asset" class="btn btn-primary" (tap)="updateEntry()"></Button>
+        </GridLayout>
+    </RadListView>
+    <RadListView row="3">
+        <GridLayout columns="*, auto">
+            <Button text="Create/View Report" class="btn btn-primary" (tap)="reports()" ></Button>
+        </GridLayout>
+    </RadListView>
+    <RadListView row="4">
+        <GridLayout columns="*, auto">
+            <Button text="Search" class="btn btn-primary" (tap)="search()"></Button>
+        </GridLayout>
+    </RadListView>
 </GridLayout>
