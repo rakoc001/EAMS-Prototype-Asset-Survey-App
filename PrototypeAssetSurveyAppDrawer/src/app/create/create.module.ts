@@ -2,7 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { CreateRoutingModule } from "./create-routing.module";
-import { CreateComponent } from "./create.component";
+import { CreateNewComponent } from "./create.component";
 
 @NgModule({
     imports: [
@@ -10,7 +10,7 @@ import { CreateComponent } from "./create.component";
         CreateRoutingModule
     ],
     declarations: [
-        CreateComponent
+        CreateNewComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import * as app from "tns-core-modules/application";
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the

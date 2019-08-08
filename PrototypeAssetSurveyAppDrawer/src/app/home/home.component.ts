@@ -8,6 +8,7 @@ import * as app from "tns-core-modules/application";
     templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
+    data = [];
 
     constructor() {
         // Use the component constructor to inject providers.
@@ -15,24 +16,32 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
+        this.data.push({ text: "Create New Entry", src: "../../images/plus.svg" });
+        this.data.push({ text: "Update/Delete Existing Asset", src: "../../images/database.svg" });
+        this.data.push({ text: "Create/View Asset Report", src: "../../images/list-alt.svg" });
+        this.data.push({ text: "Search by AssetID", src: "../../images/search.svg" });
     }
 
-    createEntry() {
-        console.log("New Asset button pressed");
+    onItemTap(args) {
+        console.log("You Tapped: " + this.data[args.text].text);
     }
 
-    updateEntry() {
-        console.log("Update Asset button pressed");
-    }
-
-    reports() {
-        console.log("Create Reports button pressed");
-    }
-
-    search() {
-        console.log("Search button pressed");
-    }
-
+//    createEntry() {
+//        console.log("New Asset button pressed");
+//    }
+//
+//    updateEntry() {
+//        console.log("Update Asset button pressed");
+//    }
+//
+//    reports() {
+//        console.log("Create Reports button pressed");
+//    }
+//
+//    search() {
+//        console.log("Search button pressed");
+//    }
+//
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();

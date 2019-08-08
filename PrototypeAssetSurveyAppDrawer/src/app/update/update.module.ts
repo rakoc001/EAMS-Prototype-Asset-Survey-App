@@ -2,7 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { UpdateRoutingModule } from "./update-routing.module";
-import { UpdateComponent } from "./update.component";
+import { UpdateDeleteComponent } from "./update.component";
 
 @NgModule({
     imports: [
@@ -10,7 +10,7 @@ import { UpdateComponent } from "./update.component";
         UpdateRoutingModule
     ],
     declarations: [
-        UpdateComponent
+        UpdateDeleteComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

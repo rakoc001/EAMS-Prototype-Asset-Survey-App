@@ -2,10 +2,10 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
-import { CreateComponent } from "./create.component";
+import { CreateNewComponent } from "./create.component";
 
 const routes: Routes = [
-    { path: "", component: CreateComponent }
+    { path: "", component: CreateNewComponent }
 ];
 
 @NgModule({

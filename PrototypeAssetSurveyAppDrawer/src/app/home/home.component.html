@@ -19,6 +19,18 @@
     <Label class="page-icon fa" text="&#xf015;"></Label>
     <Label class="page-placeholder" text=""></Label>
 </GridLayout> -->
+
+<ScrollView class="page">
+    <ListView class="list-group" [items]="data" (itemTap)="onItemTap($event)">
+        <ng-template let-item="item">
+            <GridLayout class="list-group-item" rows="*" columns="auto, *">
+                <Image row="0" col="0" [src]="item.src" class="thumb img-circle"></Image>
+                <Label row="0" col="1" [text]="item.txt"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</ScrollView>
+<!--
 <GridLayout rows="auto, *">
     <RadListView row="1">
         <GridLayout columns="*, auto">
@@ -41,3 +53,4 @@
         </GridLayout>
     </RadListView>
 </GridLayout>
+-->
