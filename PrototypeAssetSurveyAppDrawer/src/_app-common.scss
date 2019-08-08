@@ -99,7 +99,7 @@ $sidedrawer-list-icon-size: 20;
     justify-content: center;
     align-items: center;
     background-size: cover;
-    background-image: url("./images/background.jpg");
+    background-image: url("~/images/background.jpg");
 
     .form{
         width: 300;
@@ -118,20 +118,22 @@ $sidedrawer-list-icon-size: 20;
             } // close .input-border class
         } // close .input class
 
-        .btn{
+        .btn {
             align-items: center;
             .btn-primary {
                 background-color: $btn-color;
                 margin-left: 0;
             } // close .btn-primary class
-            .btn-secondary{
+            .btn-secondary {
                 background-color: $btn-color-secondary;
                 margin-left: 0;
             }
         }// close .btn class
     } // close .form class
-
-
-
-
 } // close .login class
+
+// Home page styles
+.list-group {
+    color: $text-color;
+    background-color: $background-dark;
+}
