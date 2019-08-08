@@ -1,25 +1,43 @@
 <ActionBar class="action-bar">
-    <!--
-    Use the NavigationButton as a side-drawer button in Android
-    because ActionItems are shown on the right side of the ActionBar
-    -->
     <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <!--
-    Use the ActionItem for IOS with position set to left. Using the
-    NavigationButton as a side-drawer button in iOS is not possible,
-    because its function is to always navigate back in the application.
-    -->
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<!-- <GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text=""></Label>
-</GridLayout> -->
+<GridLayout rows="auto, *" class="home-list">
+    <ScrollView row="0" class="home-list">
+        <StackLayout>
+            <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/create')">
+                <Label col="0" text="&#xf067;" class="fa"></Label>
+                <Label col="1" text="Create New Asset" class="p-r-10"></Label>
+            </GridLayout>
 
+            <StackLayout class="hr-light"></StackLayout>
+
+            <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/update')">
+                <Label col="0" text="&#xf1c0;" class="fa"></Label>
+                <Label col="1" text="Update/Delete Existing Asset" class="p-r-10"></Label>
+            </GridLayout>
+
+            <StackLayout class="hr-light"></StackLayout>
+
+            <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/reports')">
+                <Label col="0" text="&#xf022;" class="fa"></Label>
+                <Label col="1" text="Create/View Asset Reports" class="p-r-10"></Label>
+            </GridLayout>
+
+            <StackLayout class="hr-light"></StackLayout>
+
+            <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('search')">
+                <Label col="0" text="&#xf002;" class="fa"></Label>
+                <Label col="1" text="Search by AssetID" class="p-r-10"></Label>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
+<!--
 <ScrollView class="page">
     <ListView class="list-group" [items]="data" (itemTap)="onItemTap($event)">
         <ng-template let-item="item">
@@ -30,27 +48,29 @@
         </ng-template>
     </ListView>
 </ScrollView>
+-->
 <!--
-<GridLayout rows="auto, *">
-    <RadListView row="1">
+<FlexboxLayout>
+  <StackLayout class="buttons">
+    <GridLayout rows="auto, auto, auto, *">
+        <Button row="0">
         <GridLayout columns="*, auto">
-            <Button text="Create New Asset" class="btn btn-primary" (tap)="createAsset()"></Button>
+            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
+            <Button row="0" col="1" text="Create New Asset" class="btn btn-primary" (tap)="createAsset()"></Button>
         </GridLayout>
-    </RadListView>
-    <RadListView row="2">
-        <GridLayout columns="*, auto">
-            <Button text="Update/Delete Existing Asset" class="btn btn-primary" (tap)="updateAsset()"></Button>
+        <GridLayout row="1" columns="*, auto">
+            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
+            <Button row="0" col="1" text="Update/Delete Existing Asset" class="btn btn-primary" (tap)="updateAsset()"></Button>
         </GridLayout>
-    </RadListView>
-    <RadListView row="3">
-        <GridLayout columns="*, auto">
-            <Button text="Create/View Report" class="btn btn-primary" (tap)="reports()" ></Button>
+        <GridLayout row="2" columns="*, auto">
+            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
+            <Button row="0" col="1" text="Create/View Report" class="btn btn-primary" (tap)="reports()" ></Button>
         </GridLayout>
-    </RadListView>
-    <RadListView row="4">
-        <GridLayout columns="*, auto">
-            <Button text="Search" class="btn btn-primary" (tap)="search()"></Button>
+        <GridLayout row="3" columns="*, auto">
+            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
+            <Button row="0" col="1" text="Search" class="btn btn-primary" (tap)="search()"></Button>
         </GridLayout>
-    </RadListView>
-</GridLayout>
+    </GridLayout>
+  </StackLayout>
+</FlexboxLayout>
 -->

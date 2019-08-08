@@ -16,14 +16,14 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
-        this.data.push({ text: "Create New Entry", src: "../../images/plus.svg" });
-        this.data.push({ text: "Update/Delete Existing Asset", src: "../../images/database.svg" });
-        this.data.push({ text: "Create/View Asset Report", src: "../../images/list-alt.svg" });
-        this.data.push({ text: "Search by AssetID", src: "../../images/search.svg" });
+        this.data.push({ text: "Create New Entry"/*, src: "../../images/plus.svg" */});
+        this.data.push({ text: "Update/Delete Existing Asset"/*, src: "../../images/database.svg" */});
+        this.data.push({ text: "Create/View Asset Report"/*, src: "../../images/list-alt.svg" */});
+        this.data.push({ text: "Search by AssetID"/*, src: "../../images/search.svg" */});
     }
 
     onItemTap(args) {
-        console.log("You Tapped: " + this.data[args.text].text);
+        console.log("You Tapped: " + this.data[args.index].text);
     }
 
 //    createEntry() {
