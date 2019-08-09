@@ -133,7 +133,10 @@ $sidedrawer-list-icon-size: 20;
 } // close .login class
 
 // Home page styles
-.list-group {
+.home-list {
     color: $text-color;
     background-color: $background-dark;
+    .home-list-item {
+        vertical-align: center;
+    }
 }

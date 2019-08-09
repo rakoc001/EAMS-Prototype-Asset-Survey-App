@@ -7,31 +7,31 @@
 </ActionBar>
 
 <GridLayout rows="auto, *" class="home-list">
-    <ScrollView row="0" class="home-list">
+    <ScrollView row="0" <!-- class="home-list"-->>
         <StackLayout>
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/create')">
-                <Label col="0" text="&#xf067;" class="fa"></Label>
+                <Label col="0" text="&#xf067;" class="fa" height="50" width="50"></Label>
                 <Label col="1" text="Create New Asset" class="p-r-10"></Label>
             </GridLayout>
 
-            <StackLayout class="hr-light"></StackLayout>
+            <StackLayout class="hr-light" height="5"></StackLayout>
 
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/update')">
-                <Label col="0" text="&#xf1c0;" class="fa"></Label>
+                <Label col="0" text="&#xf1c0;" class="fa" height="50" width="50"></Label>
                 <Label col="1" text="Update/Delete Existing Asset" class="p-r-10"></Label>
             </GridLayout>
 
-            <StackLayout class="hr-light"></StackLayout>
+            <StackLayout class="hr-light" height="5"></StackLayout>
 
-            <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/reports')">
-                <Label col="0" text="&#xf022;" class="fa"></Label>
+            <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/report')">
+                <Label col="0" text="&#xf022;" class="fa" height="50" width="50"></Label>
                 <Label col="1" text="Create/View Asset Reports" class="p-r-10"></Label>
             </GridLayout>
 
-            <StackLayout class="hr-light"></StackLayout>
+            <StackLayout class="hr-light" height="5"></StackLayout>
 
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('search')">
-                <Label col="0" text="&#xf002;" class="fa"></Label>
+                <Label col="0" text="&#xf002;" class="fa" height="50" width="50"></Label>
                 <Label col="1" text="Search by AssetID" class="p-r-10"></Label>
             </GridLayout>
         </StackLayout>

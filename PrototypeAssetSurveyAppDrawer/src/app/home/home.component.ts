@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { NavigationEnd, Router } from "@angular/router";
+import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
 @Component({
@@ -10,7 +13,7 @@ import * as app from "tns-core-modules/application";
 export class HomeComponent implements OnInit {
     data = [];
 
-    constructor() {
+    constructor(private router: Router, private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject providers.
     }
 
@@ -22,8 +25,12 @@ export class HomeComponent implements OnInit {
         this.data.push({ text: "Search by AssetID"/*, src: "../../images/search.svg" */});
     }
 
-    onItemTap(args) {
-        console.log("You Tapped: " + this.data[args.index].text);
+    onNavItemTap(navItemRoute: string): void {
+        this.routerExtensions.navigate([navItemRoute], {
+            transition: {
+                name: "fade"
+            }
+        });
     }
 
 //    createEntry() {
