@@ -15,6 +15,15 @@ import * as app from "tns-core-modules/application";
     templateUrl: "./create.component.html"
 })
 export class CreateNewComponent implements OnInit {
+    currentDay: number = new Date().getDate();
+    currentMonth: number = new Date().getMonth() + 1;
+    currentYear: number = new Date().getFullYear();
+
+    listPickerCondition: Array<string> = ["A - Perfect", "B - Good", "C - Fair", "D - Poor"];
+    listPickerStatus: Array<string> = ["Up", "Maintenance Required", "Down"];
+    conditionListPickerIndex: number = 0;
+    statusListPickerIndex: number = 0;
+
     constructor() {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
