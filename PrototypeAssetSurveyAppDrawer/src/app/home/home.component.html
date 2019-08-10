@@ -10,67 +10,30 @@
     <ScrollView row="0" <!-- class="home-list"-->>
         <StackLayout>
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/create')">
-                <Label col="0" text="&#xf067;" class="fa" height="50" width="50"></Label>
-                <Label col="1" text="Create New Asset" class="p-r-10"></Label>
+                <Image col="0" src="~/images/Plus.jpg" class="thumb img-circle"></Image>
+                <Label col="1" text="Create New Asset" class="p-l-15 p-t-11"></Label>
             </GridLayout>
 
             <StackLayout class="hr-light" height="5"></StackLayout>
 
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/update')">
-                <Label col="0" text="&#xf1c0;" class="fa" height="50" width="50"></Label>
-                <Label col="1" text="Update/Delete Existing Asset" class="p-r-10"></Label>
+                <Image col="0" src="~/images/Database.jpg" class="thumb img-circle"></Image>
+                <Label col="1" text="Update/Delete Existing Asset" class="p-l-15 p-t-11"></Label>
             </GridLayout>
 
             <StackLayout class="hr-light" height="5"></StackLayout>
 
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('/report')">
-                <Label col="0" text="&#xf022;" class="fa" height="50" width="50"></Label>
-                <Label col="1" text="Create/View Asset Reports" class="p-r-10"></Label>
+                <Image col="0" src="~/images/Reports.jpg" class="thumb img-circle"></Image>
+                <Label col="1" text="Create/View Asset Reports" class="p-l-15 p-t-11"></Label>
             </GridLayout>
 
             <StackLayout class="hr-light" height="5"></StackLayout>
 
             <GridLayout columns="auto, *" class="home-list-item" (tap)="onNavItemTap('search')">
-                <Label col="0" text="&#xf002;" class="fa" height="50" width="50"></Label>
-                <Label col="1" text="Search by AssetID" class="p-r-10"></Label>
+                <Image col="0" src="~/images/Search.jpg" class="thumb img-circle"></Image>
+                <Label col="1" text="Search by AssetID" class="p-l-15 p-t-11"></Label>
             </GridLayout>
         </StackLayout>
     </ScrollView>
 </GridLayout>
-<!--
-<ScrollView class="page">
-    <ListView class="list-group" [items]="data" (itemTap)="onItemTap($event)">
-        <ng-template let-item="item">
-            <GridLayout class="list-group-item" rows="*" columns="auto, *">
-                <Image row="0" col="0" [src]="item.src" class="thumb img-circle"></Image>
-                <Label row="0" col="1" [text]="item.txt"></Label>
-            </GridLayout>
-        </ng-template>
-    </ListView>
-</ScrollView>
--->
-<!--
-<FlexboxLayout>
-  <StackLayout class="buttons">
-    <GridLayout rows="auto, auto, auto, *">
-        <Button row="0">
-        <GridLayout columns="*, auto">
-            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
-            <Button row="0" col="1" text="Create New Asset" class="btn btn-primary" (tap)="createAsset()"></Button>
-        </GridLayout>
-        <GridLayout row="1" columns="*, auto">
-            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
-            <Button row="0" col="1" text="Update/Delete Existing Asset" class="btn btn-primary" (tap)="updateAsset()"></Button>
-        </GridLayout>
-        <GridLayout row="2" columns="*, auto">
-            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
-            <Button row="0" col="1" text="Create/View Report" class="btn btn-primary" (tap)="reports()" ></Button>
-        </GridLayout>
-        <GridLayout row="3" columns="*, auto">
-            <Image row="0" col="0" src="~/images/logo.png" class="logo"></Image>
-            <Button row="0" col="1" text="Search" class="btn btn-primary" (tap)="search()"></Button>
-        </GridLayout>
-    </GridLayout>
-  </StackLayout>
-</FlexboxLayout>
--->
