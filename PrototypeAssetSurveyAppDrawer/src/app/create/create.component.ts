@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { NavigationEnd, Router } from "@angular/router";
+import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
 /* ***********************************************************
@@ -24,7 +27,7 @@ export class CreateNewComponent implements OnInit {
     conditionListPickerIndex: number = 0;
     statusListPickerIndex: number = 0;
 
-    constructor() {
+    constructor(private router: Router, private routerExtensions: RouterExtensions) {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
         *************************************************************/
@@ -35,4 +38,18 @@ export class CreateNewComponent implements OnInit {
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
     }
+
+    onNavItemTap(navItemRoute: string): void {
+        this.routerExtensions.navigate([navItemRoute], {
+            transition: {
+                name: "fade"
+            }
+        });
+    }
+
+    onDrawerButtonTap(): void {
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.showDrawer();
+    }
+
 }
