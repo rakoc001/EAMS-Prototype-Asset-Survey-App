@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { AuthGuard } from "./auth-guard.service";
 
 import { LoginComponent } from "../login/login.component";
 import { HomeComponent } from "./home/home.component";
@@ -9,6 +10,10 @@ import { UpdateDeleteComponent } from "./update/update.component";
 import { ReportComponent } from "./report/report.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { SearchComponent } from "./search/search.component";
+
+export const authProviders = [
+    AuthGuard
+];
 
 export const routes: Routes = [
     { path: "", component: LoginComponent },
