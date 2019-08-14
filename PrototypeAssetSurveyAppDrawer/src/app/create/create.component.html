@@ -10,14 +10,14 @@
 	<ScrollView>
 		<StackLayout>
 			<GridLayout class="create-form-element">
-				<TextField #assetIDTextField [(ngModel)]="asset" hint="Enter Asset ID"
+				<TextField #assetIDTextField [(ngModel)]="id" hint="Enter Asset ID"
 					col="0"></TextField>
 			</GridLayout>
 			<GridLayout class="condition-form-element">
-				<ListPicker [items]="listPickerCondition" [(ngModel)]="conditionListPickerIndex"></ListPicker>
+				<ListPicker [items]="listPickerCondition" [(ngModel)]="condition"></ListPicker>
 			</GridLayout>
 			<GridLayout class="status-form-element">
-				<ListPicker [items]="listPickerStatus" [(ngModel)]="statusListPickerIndex"></ListPicker>
+				<ListPicker [items]="listPickerStatus" [(ngModel)]="status"></ListPicker>
 			</GridLayout>
 		</StackLayout>
 	</ScrollView>
