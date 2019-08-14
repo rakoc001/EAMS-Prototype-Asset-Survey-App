@@ -11,7 +11,7 @@ import { View } from "tns-core-modules/ui/core/view"
 
 import { getString } from "tns-core-modules/application-settings";
 import { alert, LoginService, User } from "../../shared";
-import { Asset } from "../../shared/asset.model";
+import { Asset } from "../assets/asset.model";
 import { DatabaseService } from "../../database/sqlite.service";
 
 /* ***********************************************************
@@ -48,8 +48,6 @@ export class CreateNewComponent implements OnInit {
     db: any;
     user_id: string;
     @ViewChild("assetTextField", {static:true}) assetTextField: ElementRef;
-    // @ViewChild("listPickerCondition") listPickerCondition: ElementRef;
-    // @ViewChild("listPickerStatus") listPickerStatus: ElementRef;
 
     constructor(
         private router: Router,
