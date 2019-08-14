@@ -21,11 +21,20 @@ export class CreateNewComponent implements OnInit {
     currentDay: number = new Date().getDate();
     currentMonth: number = new Date().getMonth() + 1;
     currentYear: number = new Date().getFullYear();
+    todaysDate = String(this.currentYear) + "-" + String(this.currentMonth) + "-" + String(this.currentDay);
 
-    listPickerCondition: Array<string> = ["A - Perfect", "B - Good", "C - Fair", "D - Poor"];
-    listPickerStatus: Array<string> = ["Up", "Maintenance Required", "Down"];
-    conditionListPickerIndex: number = 0;
-    statusListPickerIndex: number = 0;
+    assetId: string;
+    listPickerCondition: Array<string> = ["Please select a condition...",
+                                          "A - Perfect",
+                                          "B - Good",
+                                          "C - Fair",
+                                          "D - Poor"];
+    listPickerStatus: Array<string> = ["Please select a status...",
+                                       "Up",
+                                       "Maintenance Required",
+                                       "Down"];
+    condition: number = 0;
+    status: number = 0;
 
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
         /* ***********************************************************
@@ -50,6 +59,15 @@ export class CreateNewComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    submit(): void {
+        console.log("Submit Button Pressed");
+        console.log("Asset Id: " + this.assetId);
+        console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
+        console.log("Asset Status: " + this.listPickerStatus[this.status]);
+        console.log("Asset Created Date: " + this.todaysDate);
+        console.log("Asset Changed Date: " + this.todaysDate);
     }
 
 }
