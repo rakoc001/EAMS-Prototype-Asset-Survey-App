@@ -5,6 +5,8 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
+import { DatabaseService } from "../../database/sqlite.service";
+
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
 * global app router module. Add the following object to the global array of routes:
@@ -35,8 +37,12 @@ export class CreateNewComponent implements OnInit {
                                        "Down"];
     condition: number = 0;
     status: number = 0;
+    db: any;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private router: Router,
+                private routerExtensions: RouterExtensions,
+                private database: DatabaseService
+              ) {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
         *************************************************************/
@@ -46,6 +52,7 @@ export class CreateNewComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
+        openDbConnection();
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -61,13 +68,38 @@ export class CreateNewComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
+    openDbConnection() {
+        this.database.getdbConnection()
+    }
+
     submit(): void {
-        console.log("Submit Button Pressed");
+        if (this.assetId.trim() === "") {
+            alert("Enter a valid AssetId");
+            return;
+        }
+
+        if (this.condition === 0) {
+            alert("Select a valid Condition");
+            return;
+        }
+
+        if (this.status === 0) {
+            alert("Select a valid Status");
+            return;
+        }
+        
+        this.createdDate = this.todaysDate;
+        this.changedDate = this.todaysDate;
+        this.changedBy = this.user_id;
         console.log("Asset Id: " + this.assetId);
         console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
         console.log("Asset Status: " + this.listPickerStatus[this.status]);
         console.log("Asset Created Date: " + this.todaysDate);
         console.log("Asset Changed Date: " + this.todaysDate);
+
+        this.database.execSQL("INSERT INTO assets (assetId, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy])
+
+        console.log("Submit Button Pressed");
     }
 
 }
