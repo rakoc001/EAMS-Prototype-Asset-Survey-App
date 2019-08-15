@@ -20,6 +20,11 @@ import { DatabaseService } from "../../database/sqlite.service";
     templateUrl: "./create.component.html"
 })
 export class CreateNewComponent implements OnInit {
+    createdDate: string;
+    changedDate: string;
+    changedBy: string;
+    user_id: string;
+
     currentDay: number = new Date().getDate();
     currentMonth: number = new Date().getMonth() + 1;
     currentYear: number = new Date().getFullYear();
@@ -87,7 +92,7 @@ export class CreateNewComponent implements OnInit {
             alert("Select a valid Status");
             return;
         }
-        
+
         this.createdDate = this.todaysDate;
         this.changedDate = this.todaysDate;
         this.changedBy = this.user_id;
@@ -97,7 +102,7 @@ export class CreateNewComponent implements OnInit {
         console.log("Asset Created Date: " + this.todaysDate);
         console.log("Asset Changed Date: " + this.todaysDate);
 
-        this.database.execSQL("INSERT INTO assets (assetId, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy])
+        this.db.execSQL("INSERT INTO assets (assetId, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy])
 
         console.log("Submit Button Pressed");
     }
