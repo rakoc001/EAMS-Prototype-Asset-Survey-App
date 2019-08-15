@@ -6,6 +6,7 @@ import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
 const firebase = require("nativescript-plugin-firebase");
+import { UserService } from "../shared/login.service";
 
 @Component({
     moduleId: module.id,
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
-        firebase.init({
+        /*firebase.init({
             // Optionally pass in properties for database, authentication and cloud messaging,
             // see their respective docs.
         }).then(
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
             error => {
                 console.log(`firebase.init error: ${error}`);
             }
-        );
+        );*/
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -58,5 +59,10 @@ export class AppComponent implements OnInit {
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
+    }
+
+    logout() {
+        this.userService.logout();
+        this.routerExtensions.navigate(["/login"]);
     }
 }
