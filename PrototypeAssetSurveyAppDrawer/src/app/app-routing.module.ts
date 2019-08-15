@@ -12,6 +12,7 @@ import { SearchComponent } from "./search/search.component";
 
 export const routes: Routes = [
     { path: "", component: LoginComponent },
+    { path: "login", component: LoginComponent },
     { path: "home", component: HomeComponent },
     { path: "create", component: CreateNewComponent },
     { path: "update", component: UpdateDeleteComponent },
