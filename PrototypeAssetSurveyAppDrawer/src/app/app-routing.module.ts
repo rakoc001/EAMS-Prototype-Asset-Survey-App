@@ -10,6 +10,8 @@ import { ReportComponent } from "./report/report.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { SearchComponent } from "./search/search.component";
 
+import { AuthGuard } from "./auth-guard.service";
+
 export const routes: Routes = [
     { path: "", component: LoginComponent },
     { path: "login", component: LoginComponent },
@@ -35,6 +37,10 @@ export const navigatableComponents = [
     ReportComponent,
     SettingsComponent,
     SearchComponent
+];
+
+ export const authProviders = [
+    AuthGuard
 ];
 
 @NgModule({
