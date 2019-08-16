@@ -5,8 +5,9 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
-const firebase = require("nativescript-plugin-firebase");
-import { UserService } from "../shared/login.service";
+//const firebase = require("nativescript-plugin-firebase");
+import { LoginService } from "../shared/login.service";
+import { DatabaseService } from "../database/sqlite.service";
 
 @Component({
     moduleId: module.id,
@@ -17,7 +18,21 @@ export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private router: Router,
+                private routerExtensions: RouterExtensions,
+                private userService: LoginService,
+                private database: DatabaseService) {
+                    this.database.getdbConnection()
+                        .then(db => {
+                            db.execSQL("CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, AssetId TEXT, Condition TEXT, Status TEXT, CreatedDate TEXT, ChangedDate TEXT, ChangedBy TEXT)").then(() => {
+                            }, error => {
+                                console.log("CREATE TABLE ERROR", error);
+                            });
+                            db.execSQL("CREATE TABLE IF NOT EXISTS user (user_id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE, password TEXT)").then(() => {
+                            }, error => {
+                                console.log("CREATE TABLE ERROR", error);
+                            });
+                        });
         // Use the component constructor to inject services.
     }
 
