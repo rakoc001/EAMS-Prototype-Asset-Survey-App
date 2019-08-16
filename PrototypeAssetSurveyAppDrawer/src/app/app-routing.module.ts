@@ -30,7 +30,7 @@ export const routes: Routes = [
 ];
 
 export const navigatableComponents = [
-    LoginComponent,
+    //LoginComponent,
     HomeComponent,
     CreateNewComponent,
     UpdateDeleteComponent,
