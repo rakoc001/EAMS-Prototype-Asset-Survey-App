@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     }
 
     clearFields() {
-        thisuser.email = '';
+        this.user.email = '';
         this.user.password = '';
     }
 
