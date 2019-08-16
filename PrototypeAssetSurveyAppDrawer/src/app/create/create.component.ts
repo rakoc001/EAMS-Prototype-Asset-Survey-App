@@ -57,7 +57,7 @@ export class CreateNewComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
-        openDbConnection();
+        this.openDbConnection();
     }
 
     onNavItemTap(navItemRoute: string): void {
