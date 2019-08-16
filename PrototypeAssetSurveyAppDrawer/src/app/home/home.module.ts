@@ -1,13 +1,19 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home.component";
 
 @NgModule({
     imports: [
+        NativeScriptUISideDrawerModule,
+        NativeScriptUIListViewModule,
         NativeScriptCommonModule,
-        HomeRoutingModule
+        HomeRoutingModule,
+        NativeScriptFormsModule
     ],
     declarations: [
         HomeComponent

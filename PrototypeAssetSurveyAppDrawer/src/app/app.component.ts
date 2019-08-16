@@ -5,7 +5,9 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
-const firebase = require("nativescript-plugin-firebase");
+//const firebase = require("nativescript-plugin-firebase");
+import { LoginService } from "../shared/login.service";
+import { DatabaseService } from "../database/sqlite.service";
 
 @Component({
     moduleId: module.id,
@@ -16,7 +18,21 @@ export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private router: Router,
+                private routerExtensions: RouterExtensions,
+                private userService: LoginService,
+                private database: DatabaseService) {
+                    this.database.getdbConnection()
+                        .then(db => {
+                            db.execSQL("CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, AssetId TEXT, Condition TEXT, Status TEXT, CreatedDate TEXT, ChangedDate TEXT, ChangedBy TEXT)").then(() => {
+                            }, error => {
+                                console.log("CREATE TABLE ERROR", error);
+                            });
+                            db.execSQL("CREATE TABLE IF NOT EXISTS user (user_id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE, password TEXT)").then(() => {
+                            }, error => {
+                                console.log("CREATE TABLE ERROR", error);
+                            });
+                        });
         // Use the component constructor to inject services.
     }
 
@@ -28,7 +44,7 @@ export class AppComponent implements OnInit {
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
-        firebase.init({
+        /*firebase.init({
             // Optionally pass in properties for database, authentication and cloud messaging,
             // see their respective docs.
         }).then(
@@ -38,7 +54,7 @@ export class AppComponent implements OnInit {
             error => {
                 console.log(`firebase.init error: ${error}`);
             }
-        );
+        );*/
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -58,5 +74,10 @@ export class AppComponent implements OnInit {
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
+    }
+
+    logout() {
+        this.userService.logout();
+        this.routerExtensions.navigate(["/login"]);
     }
 }

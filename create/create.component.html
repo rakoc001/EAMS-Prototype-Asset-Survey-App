@@ -1,0 +1,27 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Create New Asset"></Label>
+</ActionBar>
+
+<GridLayout rows="auto, *" class="create-form">
+	<ScrollView>
+		<StackLayout>
+			<GridLayout class="create-form-element">
+				<TextField #assetIDTextField [(ngModel)]="assetId" hint="Enter Asset ID"
+					col="0"></TextField>
+			</GridLayout>
+			<GridLayout class="condition-form-element">
+				<ListPicker [items]="listPickerCondition" [(ngModel)]="condition"></ListPicker>
+			</GridLayout>
+			<GridLayout class="status-form-element">
+				<ListPicker [items]="listPickerStatus" [(ngModel)]="status"></ListPicker>
+			</GridLayout>
+      <GridLayout class="submit-form">
+        <Button text="Submit." (tap)="submit()"></Button>
+      </GridLayout>
+		</StackLayout>
+	</ScrollView>
+</GridLayout>

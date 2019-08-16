@@ -6,10 +6,22 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
-import { AppRoutingModule, routes, navigatableComponents } from "./app-routing.module";
+import { AppRoutingModule, routes, navigatableComponents, authProviders } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
+import { LoginModule } from "../login/login.module";
+import { setStatusBarColors, BackendService, LoginService } from "../shared"
+import { DatabaseService } from "../database/sqlite.service";
+
+setStatusBarColors();
+
 @NgModule({
+    providers: [
+        authProviders,
+        BackendService,
+        LoginService,
+        DatabaseService
+    ],
     bootstrap: [
         AppComponent
     ],
@@ -21,7 +33,8 @@ import { AppComponent } from "./app.component";
         NativeScriptHttpModule,
         NativeScriptRouterModule,
         NativeScriptRouterModule.forRoot(routes),
-        NativeScriptUIListViewModule
+        NativeScriptUIListViewModule,
+        LoginModule
     ],
     declarations: [
         AppComponent,
