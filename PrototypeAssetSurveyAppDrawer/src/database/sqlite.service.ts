@@ -13,4 +13,15 @@ export class DatabaseService {
                 db.close();
             })
     }
+
+    /*public getdbConnection() {
+        return new Sqlite('users');
+    }*/
+/*
+    public closedbConnectionUsers() {
+        new Sqlite('users')
+            .then((db) => {
+                db.close();
+            })
+    }*/
 }

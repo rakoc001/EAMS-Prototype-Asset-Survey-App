@@ -32,12 +32,14 @@ export class LoginComponent implements OnInit {
     }
 
     submit() {
+        console.log("Submit button pressed");
         if (!this.user.isValidEmail()) {
             alert("Enter a valid email address.")
             return;
         }
 
         if (this.isLoggingIn) {
+            console.log("triggering login");
             this.login();
         } else {
             this.signUp();
@@ -45,10 +47,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        console.log("Login triggered");
         this.userService.login(this.user)
             .then(status => {
-                setString("user_id", this.user.email);
-                this.routerExtensions.navigate(["/"], { clearHistory: true });
+                setString("userID", String(this.user.userID));
+                this.routerExtensions.navigate(["/home"], { clearHistory: true });
             }, err => {
                 this.clearFields();
                 alert("Unfortunately we could not find your account.")

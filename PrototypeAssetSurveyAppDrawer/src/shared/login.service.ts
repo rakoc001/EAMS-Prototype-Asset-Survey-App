@@ -15,7 +15,7 @@ export class LoginService {
 
             this.database.getdbConnection()
                 .then(db => {
-                    db.execSQL("INSERT INTO users (user_id, password) VALUES (?,?)", [user.email, user.password]).then(id => {
+                    db.execSQL("INSERT INTO users (email, password) VALUES (?,?)", [user.email, user.password]).then(id => {
                         resolve({ status: true });
                     }, err => {
                         reject({ status: false });
@@ -29,7 +29,7 @@ export class LoginService {
 
             this.database.getdbConnection()
                 .then(db => {
-                    db.all("SELECT * FROM users where user_id LIKE '" + user.email + "' AND password LIKE '" + user.password + "'").then(rows => {
+                    db.all("SELECT * FROM users where email LIKE '" + user.email + "' AND password LIKE '" + user.password + "'").then(rows => {
                         if (rows.length > 0) {
                             BackendService.token = "dummy_token";
                             resolve({ status: true });
