@@ -68,5 +68,8 @@ export class AppComponent implements OnInit {
     logout() {
         this.userService.logout();
         this.routerExtensions.navigate(["/login"]);
+
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.closeDrawer();
     }
 }
