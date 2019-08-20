@@ -5,7 +5,7 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
-//const firebase = require("nativescript-plugin-firebase");
+const firebase = require("nativescript-plugin-firebase");
 import { LoginService } from "../shared/login.service";
 import { DatabaseService } from "../database/sqlite.service";
 
@@ -37,6 +37,17 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        firebase.init({
+            // Optionally pass in properties for database, authentication and cloud messaging,
+            // see their respective docs
+        }).then(
+            () => {
+              console.log("firebase.init done");
+          } ,
+          error => {
+              console.log(`firebase.init error: ${error}`);
+          }
+        );
         this._activatedUrl = "/login";
         this._sideDrawerTransition = new SlideInOnTopTransition();
 

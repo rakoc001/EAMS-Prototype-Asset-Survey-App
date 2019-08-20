@@ -59,6 +59,10 @@ export class CreateNewComponent implements OnInit {
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
         this.openDbConnection();
+        // this.user_id = this.database.getdbConnection()
+        //                   .then(db => {
+        //                       db.all("SELECT UserID FROM users")
+        //                   })
     }
 
     onNavItemTap(navItemRoute: string): void {
