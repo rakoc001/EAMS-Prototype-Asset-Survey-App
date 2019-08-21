@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
@@ -23,14 +23,13 @@ export class CreateNewComponent implements OnInit {
     createdDate: string;
     changedDate: string;
     changedBy: string;
-    user_id: string;
+    userID: string;
 
     currentDay: number = new Date().getDate();
     currentMonth: number = new Date().getMonth() + 1;
     currentYear: number = new Date().getFullYear();
     todaysDate = String(this.currentYear) + "-" + String(this.currentMonth) + "-" + String(this.currentDay);
 
-    assetId: string;
     listPickerCondition: Array<string> = ["Please select a condition...",
                                           "A - Perfect",
                                           "B - Good",
@@ -42,6 +41,8 @@ export class CreateNewComponent implements OnInit {
                                        "Down"];
     condition: number = 0;
     status: number = 0;
+    @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
+    assetId = String(this.assetIDTextField);
     db: any;
 
     constructor(private router: Router,
@@ -58,6 +59,10 @@ export class CreateNewComponent implements OnInit {
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
         this.openDbConnection();
+        // this.user_id = this.database.getdbConnection()
+        //                   .then(db => {
+        //                       db.all("SELECT UserID FROM users")
+        //                   })
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -78,7 +83,7 @@ export class CreateNewComponent implements OnInit {
     }
 
     submit(): void {
-        if (this.assetId.trim() === "") {
+        if (this.assetId === "") {
             alert("Enter a valid AssetId");
             return;
         }
@@ -95,16 +100,21 @@ export class CreateNewComponent implements OnInit {
 
         this.createdDate = this.todaysDate;
         this.changedDate = this.todaysDate;
-        this.changedBy = this.user_id;
+        this.changedBy = this.userID;
         console.log("Asset Id: " + this.assetId);
         console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
         console.log("Asset Status: " + this.listPickerStatus[this.status]);
         console.log("Asset Created Date: " + this.todaysDate);
         console.log("Asset Changed Date: " + this.todaysDate);
+        console.log("Asset Changed By: " + this.changedBy);
 
-        this.db.execSQL("INSERT INTO assets (assetId, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy])
+        this.database.getdbConnection()
+            .then(db => {
+                db.execSQL("INSERT INTO assets (assetID, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy]);
 
         console.log("Submit Button Pressed");
-    }
+        alert("Asset Submitted");
+    });
 
+  }
 }

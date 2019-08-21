@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
-
+import { RouterExtensions } from "nativescript-angular/router";
 import { User } from "./user.model";
 import { BackendService } from "./backend.service";
 import { DatabaseService } from "../database/sqlite.service";
 
 @Injectable()
 export class LoginService {
-    constructor(private database: DatabaseService) {
+    constructor(private database: DatabaseService,
+                private routerExtensions: RouterExtensions) {
 
     }
 
@@ -45,5 +46,6 @@ export class LoginService {
     logout() {
         BackendService.token = "";
         this.database.closedbConnection();
+        this.routerExtensions.navigate(["/login"]);
     }
 }
