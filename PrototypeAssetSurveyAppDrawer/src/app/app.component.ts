@@ -6,8 +6,8 @@ import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
 const firebase = require("nativescript-plugin-firebase");
+
 import { LoginService } from "../shared/login.service";
-import { DatabaseService } from "../database/sqlite.service";
 
 @Component({
     moduleId: module.id,
@@ -20,19 +20,7 @@ export class AppComponent implements OnInit {
 
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions,
-                private userService: LoginService,
-                private database: DatabaseService) {
-                    this.database.getdbConnection()
-                        .then(db => {
-                            db.execSQL("CREATE TABLE IF NOT EXISTS assets (ID INTEGER PRIMARY KEY AUTOINCREMENT, AssetID TEXT UNIQUE NOT NULL, Condition TEXT NOT NULL, Status TEXT NOT NULL, CreatedDate TEXT NOT NULL, ChangedDate TEXT NOT NULL, ChangedBy INTEGER NOT NULL, CONSTRAINT fk_users FOREIGN KEY (ChangedBy) REFERENCES users(UserID))").then(() => {
-                            }, error => {
-                                console.log("CREATE TABLE ERROR", error);
-                            });
-                            db.execSQL("CREATE TABLE IF NOT EXISTS users (UserID INTEGER PRIMARY KEY AUTOINCREMENT, Email TEXT UNIQUE NOT NULL, Password TEXT NOT NULL)").then(() => {
-                            }, error => {
-                                console.log("CREATE TABLE ERROR", error);
-                            });
-                        });
+                private userService: LoginService) {
         // Use the component constructor to inject services.
     }
 
@@ -48,6 +36,25 @@ export class AppComponent implements OnInit {
               console.log(`firebase.init error: ${error}`);
           }
         );
+        var listener = {
+            onAuthStateChanged: function(data) {
+                console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+                if (data.loggedIn) {
+                    console.log("User Info", data.user);
+                }
+            },
+            thisArg: this
+        };
+
+        // add the listener:
+        firebase.addAuthStatListener(listener);
+
+        // stop listening to auth state changes:
+        firebase.removeAuthStateListener(listener);
+
+        // check of already listening to auth state changes
+        firebase.hasAuthStateListener(listener);
+
         this._activatedUrl = "/login";
         this._sideDrawerTransition = new SlideInOnTopTransition();
 
@@ -78,7 +85,7 @@ export class AppComponent implements OnInit {
 
     logout() {
         this.userService.logout();
-        this.routerExtensions.navigate(["/login"]);
+        //this.routerExtensions.navigate(["/login"]);
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();

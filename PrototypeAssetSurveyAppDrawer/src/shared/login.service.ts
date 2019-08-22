@@ -1,51 +1,49 @@
 import { Injectable } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-import { User } from "./user.model";
-import { BackendService } from "./backend.service";
-import { DatabaseService } from "../database/sqlite.service";
+
+const firebase = require("nativescript-plugin-firebase");
 
 @Injectable()
 export class LoginService {
-    constructor(private database: DatabaseService,
-                private routerExtensions: RouterExtensions) {
+    constructor(private routerExtensions: RouterExtensions) {
 
     }
 
-    register(user: User) {
-        return new Promise<Object>((resolve, reject) => {
-
-            this.database.getdbConnection()
-                .then(db => {
-                    db.execSQL("INSERT INTO users (email, password) VALUES (?,?)", [user.email, user.password]).then(id => {
-                        resolve({ status: true });
-                    }, err => {
-                        reject({ status: false });
-                    });
-                });
+    register(user) {
+        return new Promise((resolve, reject) => {
+            console.log(user);
+            firebase.createUser({
+                email: user.email,
+                password: user.password
+            }).then(
+                function (user) {
+                    alert("User created, email: " + user.email)
+                },
+                function (errorMessage) {
+                    alert("Error: " + errorMessage)
+                }
+            );
         });
     }
 
-    login(user: User) {
-        return new Promise<Object>((resolve, reject) => {
-
-            this.database.getdbConnection()
-                .then(db => {
-                    db.all("SELECT * FROM users where email LIKE '" + user.email + "' AND password LIKE '" + user.password + "'").then(rows => {
-                        if (rows.length > 0) {
-                            BackendService.token = "dummy_token";
-                            resolve({ status: true });
-                        }
-                        else {
-                            reject({ status: false });
-                        }
-                    });
-                });
+    login(user) {
+        return new Promise((resolve, reject) => {
+            console.log(user);
+            firebase.login(
+                {
+                    type: firebase.LoginType.PASSWORD,
+                    passwordOptions: {
+                        email: user.email,
+                        password: user.password
+                    }
+                })
+                .then(result => JSON.stringify(result))
+                .catch(error => console.log(error));
         });
     }
 
     logout() {
-        BackendService.token = "";
-        this.database.closedbConnection();
+        firebase.logout();
         this.routerExtensions.navigate(["/login"]);
     }
 }
