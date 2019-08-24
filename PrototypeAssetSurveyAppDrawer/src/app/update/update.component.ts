@@ -1,9 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+
+const firebase = require("nativescript-plugin-firebase");
+const assetsCollection = firebase.firestore().collection("assets");
+import { firestore } from "nativescript-plugin-firebase";
+
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
@@ -18,7 +22,33 @@ import * as app from "tns-core-modules/application";
     templateUrl: "./update.component.html"
 })
 export class UpdateDeleteComponent implements OnInit {
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    createdDate: string;
+    changedDate: string;
+    changedBy: string;
+
+    currentDay: number = new Date().getDate();
+    currentMonth: number = new Date().getMonth() + 1;
+    currentYear: number = new Date().getFullYear();
+    todaysDate = String(this.currentYear) + "-" + String(this.currentMonth) + "-" + String(this.currentDay);
+
+    listPickerCondition: Array<string> = ["Please select a condition...",
+                                          "A - Perfect",
+                                          "B - Good",
+                                          "C - Fair",
+                                          "D - Poor"];
+    listPickerStatus: Array<string> = ["Please select a status...",
+                                       "Up",
+                                       "Maintenance Required",
+                                       "Down"];
+    condition: number = 0;
+    status: number = 0;
+    @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
+    assetId = String(this.assetIDTextField);
+    db: any;
+
+    constructor(private router: Router,
+                private routerExtensions: RouterExtensions
+    ) {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
         *************************************************************/
@@ -28,6 +58,9 @@ export class UpdateDeleteComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
+        firebase.getCurrentUser()
+            .then(user => console.log("User uid: " + user.uid))
+            .catch(error => console.log("Error getting current user: " + error));
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -41,5 +74,82 @@ export class UpdateDeleteComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    update(): void {
+        if (this.assetId === "") {
+            alert("Enter a valid AssetId");
+
+            return;
+        }
+
+        if (this.condition === 0) {
+            alert("Select a valid Condition");
+
+            return;
+        }
+
+        if (this.status === 0) {
+            alert("Select a valid Status");
+
+            return;
+        }
+        const assetDocument = firebase.firestore().collection("assets").doc(this.assetId)
+
+        /*console.log("Asset Id: " + this.assetId);
+        console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
+        console.log("Asset Status: " + this.listPickerStatus[this.status]);
+        console.log("Asset Changed Date: " + this.todaysDate);
+        console.log("Asset Changed By: " + this.changedBy);*/
+
+        assetDocument.update({
+            asset_Condition: this.listPickerCondition[this.condition],
+            asset_Status: this.listPickerStatus[this.status],
+            asset_ChangedDate: this.todaysDate,
+            asset_ChangedBy: firebase.user.uid
+        });
+
+        /* assetsCollection.doc(this.assetId).set({
+            asset_ID: this.assetId,
+            asset_Condition: this.listPickerCondition[this.condition],
+            asset_Status: this.listPickerStatus[this.status],
+            asset_CreatedDate: this.todaysDate,
+            asset_ChangedDate: this.todaysDate,
+            asset_ChangedBy: firebase.user.uid,
+            asset_IsDeleted: "false"
+        }); */
+
+        console.log("Update Button Pressed");
+        alert("Asset Update Submitted");
+
+    }
+
+    delete(): void {
+        if (this.assetId === "") {
+            alert("Enter a valid AssetId");
+            return;
+        }
+
+        if (this.condition === 0) {
+            alert("Select a valid Condition");
+            return;
+        }
+
+        if (this.status === 0) {
+            alert("Select a valid Status");
+            return;
+        }
+
+        const assetDocument = firebase.firestore().collection("assets").doc(this.assetId)
+
+        assetDocument.update({
+            asset_ChangedDate: this.todaysDate,
+            asset_ChangedBy: firebase.user.uid,
+            asset_IsDeleted: true
+        });
+
+        console.log("Delete Button Pressed");
+        alert("Asset Deleted")
+
     }
 }
