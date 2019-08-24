@@ -2,8 +2,12 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+
+const firebase = require("nativescript-plugin-firebase");
+const assetsCollection = firebase.firestore().collection("assets");
+import { firestore } from "nativescript-plugin-firebase";
+
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
@@ -21,7 +25,6 @@ export class CreateNewComponent implements OnInit {
     createdDate: string;
     changedDate: string;
     changedBy: string;
-    userID: string;
 
     currentDay: number = new Date().getDate();
     currentMonth: number = new Date().getMonth() + 1;
@@ -55,11 +58,9 @@ export class CreateNewComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
-        // this.openDbConnection();
-        // this.user_id = this.database.getdbConnection()
-        //                   .then(db => {
-        //                       db.all("SELECT UserID FROM users")
-        //                   })
+        firebase.getCurrentUser()
+            .then(user => console.log("User uid: " + user.uid))
+            .catch(error => console.log("Error getting current user: " + error));
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -74,10 +75,6 @@ export class CreateNewComponent implements OnInit {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
     }
-
-    // openDbConnection() {
-    //     this.database.getdbConnection()
-    // }
 
     submit(): void {
         if (this.assetId === "") {
@@ -95,9 +92,6 @@ export class CreateNewComponent implements OnInit {
             return;
         }
 
-        this.createdDate = this.todaysDate;
-        this.changedDate = this.todaysDate;
-        this.changedBy = this.userID;
         console.log("Asset Id: " + this.assetId);
         console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
         console.log("Asset Status: " + this.listPickerStatus[this.status]);
@@ -105,9 +99,15 @@ export class CreateNewComponent implements OnInit {
         console.log("Asset Changed Date: " + this.todaysDate);
         console.log("Asset Changed By: " + this.changedBy);
 
-        // this.database.getdbConnection()
-        //     .then(db => {
-        //         db.execSQL("INSERT INTO assets (assetID, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy]);
+        assetsCollection.doc(this.assetId).set({
+            asset_ID: this.assetId,
+            asset_Condition: this.listPickerCondition[this.condition],
+            asset_Status: this.listPickerStatus[this.status],
+            asset_CreatedDate: this.todaysDate,
+            asset_ChangedDate: this.todaysDate,
+            asset_ChangedBy: firebase.user.uid,
+            asset_IsDeleted: "false"
+        });
 
         console.log("Submit Button Pressed");
         alert("Asset Submitted");
