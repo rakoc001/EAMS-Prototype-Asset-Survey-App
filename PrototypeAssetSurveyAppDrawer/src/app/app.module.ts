@@ -11,7 +11,6 @@ import { AppComponent } from "./app.component";
 
 import { LoginModule } from "../login/login.module";
 import { setStatusBarColors, BackendService, LoginService } from "../shared"
-import { DatabaseService } from "../database/sqlite.service";
 
 setStatusBarColors();
 
@@ -19,8 +18,7 @@ setStatusBarColors();
     providers: [
         authProviders,
         BackendService,
-        LoginService,
-        DatabaseService
+        LoginService
     ],
     bootstrap: [
         AppComponent

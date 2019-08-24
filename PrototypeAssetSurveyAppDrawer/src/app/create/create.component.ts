@@ -5,8 +5,6 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
-import { DatabaseService } from "../../database/sqlite.service";
-
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
 * global app router module. Add the following object to the global array of routes:
@@ -46,8 +44,7 @@ export class CreateNewComponent implements OnInit {
     db: any;
 
     constructor(private router: Router,
-                private routerExtensions: RouterExtensions,
-                private database: DatabaseService
+                private routerExtensions: RouterExtensions
               ) {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
@@ -58,7 +55,7 @@ export class CreateNewComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
-        this.openDbConnection();
+        // this.openDbConnection();
         // this.user_id = this.database.getdbConnection()
         //                   .then(db => {
         //                       db.all("SELECT UserID FROM users")
@@ -78,9 +75,9 @@ export class CreateNewComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
-    openDbConnection() {
-        this.database.getdbConnection()
-    }
+    // openDbConnection() {
+    //     this.database.getdbConnection()
+    // }
 
     submit(): void {
         if (this.assetId === "") {
@@ -108,13 +105,12 @@ export class CreateNewComponent implements OnInit {
         console.log("Asset Changed Date: " + this.todaysDate);
         console.log("Asset Changed By: " + this.changedBy);
 
-        this.database.getdbConnection()
-            .then(db => {
-                db.execSQL("INSERT INTO assets (assetID, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy]);
+        // this.database.getdbConnection()
+        //     .then(db => {
+        //         db.execSQL("INSERT INTO assets (assetID, Condition, Status, CreatedDate, ChangedDate, ChangedBy) VALUES (?,?,?,?,?,?)", [this.assetId, this.listPickerCondition[this.condition],this.listPickerStatus[this.status], this.createdDate, this.changedDate, this.changedBy]);
 
         console.log("Submit Button Pressed");
         alert("Asset Submitted");
-    });
 
   }
 }
