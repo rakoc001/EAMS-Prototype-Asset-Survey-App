@@ -8,7 +8,6 @@ const firebase = require("nativescript-plugin-firebase");
 const assetsCollection = firebase.firestore().collection("assets");
 import { firestore } from "nativescript-plugin-firebase";
 
-
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
 * global app router module. Add the following object to the global array of routes:
@@ -94,7 +93,7 @@ export class UpdateDeleteComponent implements OnInit {
 
             return;
         }
-        const assetDocument = firebase.firestore().collection("assets").doc(this.assetId)
+        const assetDocument = assetsCollection.doc(this.assetId);
 
         /*console.log("Asset Id: " + this.assetId);
         console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
@@ -127,20 +126,23 @@ export class UpdateDeleteComponent implements OnInit {
     delete(): void {
         if (this.assetId === "") {
             alert("Enter a valid AssetId");
+
             return;
         }
 
         if (this.condition === 0) {
             alert("Select a valid Condition");
+            
             return;
         }
 
         if (this.status === 0) {
             alert("Select a valid Status");
+            
             return;
         }
 
-        const assetDocument = firebase.firestore().collection("assets").doc(this.assetId)
+        const assetDocument = assetsCollection.doc(this.assetId);
 
         assetDocument.update({
             asset_ChangedDate: this.todaysDate,
@@ -149,7 +151,7 @@ export class UpdateDeleteComponent implements OnInit {
         });
 
         console.log("Delete Button Pressed");
-        alert("Asset Deleted")
+        alert("Asset Deleted");
 
     }
 }
