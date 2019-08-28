@@ -1,9 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+
+const firebase = require("nativescript-plugin-firebase");
+const assetsCollection = firebase.firestore().collection("assets");
+import { firestore } from "nativescript-plugin-firebase";
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
@@ -18,7 +22,17 @@ import * as app from "tns-core-modules/application";
     templateUrl: "./report.component.html"
 })
 export class ReportComponent implements OnInit {
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    asset: Array<{ asset_Id: string,
+                   asset_Condition: string,
+                   asset_Status: string,
+                   asset_CreatedDate: string,
+                   asset_ChangedDate: string,
+                   asset_ChangedBy: string }>;
+    @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
+    assetId = String(this.assetIDTextField);
+
+    constructor(private router: Router,
+                private routerExtensions: RouterExtensions) {
         /* ***********************************************************
         * Use the constructor to inject app services that you need in this component.
         *************************************************************/
@@ -41,6 +55,18 @@ export class ReportComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    submit() {
+        const assetDocument = assetsCollection.where("documentRef", "==", this.assetId);
+        assetDocument
+            .get();
+        { this.asset.asset_Id = assetDocument.asset_ID;
+          this.asset.asset_Condition = assetDocument.asset_Condition;
+          this.asset.asset_Status = assetDocument.asset_Status;
+          this.asset.asset_CreatedDate = assetDocument.asset_CreatedDate;
+          this.asset.asset_ChangedDate = assetDocument.asset_ChangedDate;
+          this.asset.asset_ChangedBy = assetDocument.asset_ChangedBy; }
     }
 
 }
