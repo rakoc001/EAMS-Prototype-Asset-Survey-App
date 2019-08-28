@@ -16,21 +16,25 @@ import { firestore } from "nativescript-plugin-firebase";
 * Note that this simply points the path to the page module file. If you move the page, you need to update the route too.
 *************************************************************/
 
+/*interface DataItem{
+    asset_Id: string;
+    asset_Condition: string;
+    asset_Status: string;
+    asset_CreatedDate: string;
+    asset_ChangedDate: string;
+    asset_ChangedBy: string;
+    asset_isDeleted: boolean;
+}*/
+
 @Component({
     selector: "Report",
     moduleId: module.id,
     templateUrl: "./report.component.html"
 })
 export class ReportComponent implements OnInit {
-    asset: Array<{ asset_Id: string,
-                   asset_Condition: string,
-                   asset_Status: string,
-                   asset_CreatedDate: string,
-                   asset_ChangedDate: string,
-                   asset_ChangedBy: string }>;
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
-
+    
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions) {
         /* ***********************************************************
@@ -60,13 +64,16 @@ export class ReportComponent implements OnInit {
     submit() {
         const assetDocument = assetsCollection.where("documentRef", "==", this.assetId);
         assetDocument
-            .get();
-        { this.asset.asset_Id = assetDocument.asset_ID;
-          this.asset.asset_Condition = assetDocument.asset_Condition;
-          this.asset.asset_Status = assetDocument.asset_Status;
-          this.asset.asset_CreatedDate = assetDocument.asset_CreatedDate;
-          this.asset.asset_ChangedDate = assetDocument.asset_ChangedDate;
-          this.asset.asset_ChangedBy = assetDocument.asset_ChangedBy; }
+            .get()
+            ; /*
+        DataItem[] = [{ asset_Id: assetDocument.asset_ID,
+                               asset_Condition: assetDocument.asset_Condition,
+                               asset_Status: assetDocument.asset_Status,
+                               asset_CreatedDate: assetDocument.asset_CreatedDate,
+                               asset_ChangedDate: assetDocument.asset_ChangedDate,
+                               asset_ChangedBy: assetDocument.asset_ChangedBy,
+                               asset_isDeleted: assetDocument.asset_isDeleted }
+            ];*/
     }
 
 }
