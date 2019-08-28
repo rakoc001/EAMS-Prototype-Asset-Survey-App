@@ -17,6 +17,9 @@ yarn-debug.log*
 yarn-error.log*
 *out*.txt
 
+#Tests
+src/tests/*
+
 # General
 .DS_Store
 .AppleDouble
