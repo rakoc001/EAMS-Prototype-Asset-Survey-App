@@ -6,8 +6,8 @@ import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
 const firebase = require("nativescript-plugin-firebase");
-const assetsCollection = firebase.firestore().collection("assets");
 import { firestore } from "nativescript-plugin-firebase";
+const assetsCollection = firestore.collection("assets");
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
