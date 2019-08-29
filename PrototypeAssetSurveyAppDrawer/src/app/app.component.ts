@@ -7,12 +7,13 @@ import * as app from "tns-core-modules/application";
 
 const firebase = require("nativescript-plugin-firebase");
 
-import { LoginService } from "../shared/login.service";
+import { LoginService, User } from "../shared/";
 
 @Component({
     moduleId: module.id,
     selector: "ns-app",
-    templateUrl: "app.component.html"
+    templateUrl: "app.component.html",
+    providers: [User]
 })
 export class AppComponent implements OnInit {
     private _activatedUrl: string;
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        firebase.init({
+        /*firebase.init({
             // Optionally pass in properties for database, authentication and cloud messaging,
             // see their respective docs
         }).then(
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
 
         // check of already listening to auth state changes
         firebase.hasAuthStateListener(listener);
-
+*/
         this._activatedUrl = "/login";
         this._sideDrawerTransition = new SlideInOnTopTransition();
 
