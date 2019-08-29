@@ -14,10 +14,6 @@ export class LoginComponent implements OnInit {
     user: User;
 
     isLoggingIn = true;
-
-    toggleDisplay() {
-        this.isLoggingIn = !this.isLoggingIn;
-    }
     constructor(
         private router: Router,
         private routerExtensions: RouterExtensions,
@@ -27,30 +23,35 @@ export class LoginComponent implements OnInit {
         this.user = new User();
     }
 
+    toggleDisplay() {
+        this.isLoggingIn = !this.isLoggingIn;
+    }
+
     ngOnInit() {
         this.page.actionBarHidden = true;
     }
 
-    submit() {
+    submit(user) {
         console.log("Submit button pressed");
         if (!this.user.isValidEmail()) {
             alert("Enter a valid email address.")
+            
             return;
         }
 
         if (this.isLoggingIn) {
             console.log("triggering login");
-            this.login();
+            this.login(user);
         } else {
-            this.signUp();
+            this.signUp(user);
         }
     }
 
-    login() {
+    login(user) {
         console.log("Login triggered");
-        this.userService.login(this.user)
+        this.userService.login(user)
             .then(status => {
-                setString("userID", String(this.user.userID));
+                setString("userID", String(user.userID));
                 this.routerExtensions.navigate(["/home"], { clearHistory: true });
             }, err => {
                 this.clearFields();
@@ -58,8 +59,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    signUp() {
-        this.userService.register(this.user)
+    signUp(user) {
+        this.userService.register(user)
             .then(status => {
                 alert("Your account was successfully created.");
                 this.toggleDisplay();
@@ -71,8 +72,8 @@ export class LoginComponent implements OnInit {
     }
 
     clearFields() {
-        this.user.email = '';
-        this.user.password = '';
+        this.user.email = "";
+        this.user.password = "";
     }
 
 }
