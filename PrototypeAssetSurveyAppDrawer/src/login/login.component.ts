@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
 
     login(user) {
         console.log("Login triggered");
+        console.log("User details: " + JSON.stringify(user));
         this.userService.login(user)
             .then(status => {
                 setString("userID", String(user.userID));
