@@ -30,7 +30,7 @@ export const routes: Routes = [
 ];
 
 export const navigatableComponents = [
-    LoginComponent,
+    // LoginComponent,
     HomeComponent,
     CreateNewComponent,
     UpdateDeleteComponent,
@@ -39,8 +39,8 @@ export const navigatableComponents = [
     SearchComponent
 ];
 
- export const authProviders = [
-    AuthGuard
+export const authProviders = [
+                               AuthGuard
 ];
 
 @NgModule({
