@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
             () => {
               console.log("firebase.init done");
           } ,
-          error => {
+            error => {
               console.log(`firebase.init error: ${error}`);
           }
         );
-        var listener = {
-            onAuthStateChanged: function(data) {
+        const listener = {
+            onAuthStateChanged(data) {
                 console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
                 if (data.loggedIn) {
                     console.log("User Info", data.user);
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
         };
 
         // add the listener:
-        firebase.addAuthStatListener(listener);
+        firebase.addAuthStateListener(listener);
 
         // stop listening to auth state changes:
         firebase.removeAuthStateListener(listener);
@@ -85,7 +85,7 @@ export class AppComponent implements OnInit {
 
     logout() {
         this.userService.logout();
-        //this.routerExtensions.navigate(["/login"]);
+        this.routerExtensions.navigate(["/login"]);
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
