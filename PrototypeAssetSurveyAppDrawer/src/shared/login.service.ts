@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { User } from "./user.model";
 
 const firebase = require("nativescript-plugin-firebase");
 
 @Injectable()
 export class LoginService {
-    constructor(private routerExtensions: RouterExtensions) {
-
+    constructor(private routerExtensions: RouterExtensions,
+                private user: User) {
     }
 
     register(user) {
@@ -17,10 +18,10 @@ export class LoginService {
                 password: user.password
             }).then(
                 function (user) {
-                    alert("User created, email: " + user.email)
+                    alert("User created, email: " + user.email);
                 },
                 function (errorMessage) {
-                    alert("Error: " + errorMessage)
+                    alert("Error: " + errorMessage);
                 }
             );
         });
