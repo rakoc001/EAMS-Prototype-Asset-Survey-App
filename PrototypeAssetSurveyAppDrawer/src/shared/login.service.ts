@@ -6,15 +6,14 @@ const firebase = require("nativescript-plugin-firebase");
 
 @Injectable()
 export class LoginService {
-    // tslint:disable-next-line: new-parens
-    user = new User;
+    user = new User();
     constructor(private routerExtensions: RouterExtensions/*,
                 private user: User*/) {
     }
 
-    register(user) {
+    register() {
         return new Promise((resolve, reject) => {
-            console.log("Creating user: " + user);
+            console.log("Creating user: " + this.user);
             firebase.createUser({
                 email: this.user.email,
                 password: this.user.password
@@ -29,15 +28,15 @@ export class LoginService {
         });
     }
 
-    login(user) {
+    login() {
         return new Promise((resolve, reject) => {
-            console.log("Logging in user: " + user);
+            console.log("Login Service: Logging in user: " + this.user);
             firebase.login(
                 {
                     type: firebase.LoginType.PASSWORD,
                     passwordOptions: {
-                        email: user.email,
-                        password: user.password
+                        email: this.user.email,
+                        password: this.user.password
                     }
                 })
                 .then(result => JSON.stringify(result))
