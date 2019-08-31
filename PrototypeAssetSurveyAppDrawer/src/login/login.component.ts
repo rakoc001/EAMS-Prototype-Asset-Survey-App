@@ -11,7 +11,7 @@ import { alert, LoginService, User } from "../shared";
     templateUrl: "./login.component.html"
 })
 export class LoginComponent implements OnInit {
-    user: User;
+    user = new User();
 
     isLoggingIn = true;
     constructor(
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
         private page: Page,
         private userService: LoginService
     ) {
-        this.user = new User();
     }
 
     toggleDisplay() {
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.page.actionBarHidden = true;
     }
 
-    submit(user) {
+    submit() {
         console.log("Submit button pressed");
         if (!this.user.isValidEmail()) {
             alert("Enter a valid email address.")
@@ -41,18 +40,18 @@ export class LoginComponent implements OnInit {
 
         if (this.isLoggingIn) {
             console.log("triggering login");
-            this.login(user);
+            this.login();
         } else {
-            this.signUp(user);
+            this.signUp();
         }
     }
 
-    login(user) {
+    login() {
         console.log("Login triggered");
-        console.log("User details: " + JSON.stringify(user));
-        this.userService.login(user)
+        console.log("Login Component: User details: " + /*JSON.stringify(*/this.user)/*)*/;
+        this.userService.login()
             .then(status => {
-                setString("userID", String(user.userID));
+                setString("userID", String(this.user.userID));
                 this.routerExtensions.navigate(["/home"], { clearHistory: true });
             }, err => {
                 this.clearFields();
@@ -60,8 +59,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    signUp(user) {
-        this.userService.register(user)
+    signUp() {
+        this.userService.register()
             .then(status => {
                 alert("Your account was successfully created.");
                 this.toggleDisplay();
