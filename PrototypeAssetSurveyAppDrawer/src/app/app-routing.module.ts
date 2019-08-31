@@ -13,7 +13,8 @@ import { SearchComponent } from "./search/search.component";
 import { AuthGuard } from "./auth-guard.service";
 
 export const routes: Routes = [
-    { path: "", component: LoginComponent },
+    // { path: "", component: LoginComponent },
+    { path: "", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "home", component: HomeComponent },
     { path: "create", component: CreateNewComponent },
