@@ -11,36 +11,30 @@ export class LoginService {
                 private user: User*/) {
     }
 
-    register() {
+    register(email: string, password: string) {
         return new Promise((resolve, reject) => {
             console.log("Creating user: " + this.user);
             firebase.createUser({
-                email: this.user.email,
-                password: this.user.password
-            }).then(
-                function (user: { email: string; password: string; }) {
-                    alert("User created, email: " + this.user.email);
-                },
-                function (errorMessage) {
-                    alert("Error: " + errorMessage);
-                }
-            );
+                email: email,
+                password: password
+            }).then(resolve) 
+              .catch(reject);
         });
     }
 
-    login() {
+    login(email: string, password: string) {
         return new Promise((resolve, reject) => {
-            console.log("Login Service: Logging in user: " + this.user);
+            console.log("Login Service: Logging in user: " + email);
             firebase.login(
                 {
                     type: firebase.LoginType.PASSWORD,
                     passwordOptions: {
-                        email: this.user.email,
-                        password: this.user.password
+                        email,
+                        password
                     }
                 })
-                .then(result => JSON.stringify(result))
-                .catch(error => console.log(error));
+                .then(resolve)
+                .catch(reject);
         });
     }
 
