@@ -124,18 +124,6 @@ export class UpdateDeleteComponent implements OnInit {
             return;
         }
 
-        if (this.condition === 0) {
-            alert("Select a valid Condition");
-            
-            return;
-        }
-
-        if (this.status === 0) {
-            alert("Select a valid Status");
-            
-            return;
-        }
-
         const assetDocument = assetsCollection.doc(this.assetId);
 
         assetDocument.update({
