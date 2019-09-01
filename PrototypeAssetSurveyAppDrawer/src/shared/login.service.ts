@@ -13,7 +13,7 @@ export class LoginService {
 
     register(email: string, password: string) {
         return new Promise((resolve, reject) => {
-            console.log("Creating user: " + this.user);
+            console.log("Creating user: " + email);
             firebase.createUser({
                 email: email,
                 password: password

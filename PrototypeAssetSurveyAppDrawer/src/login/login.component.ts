@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        console.log("Login triggered");
-        console.log("Login Component: User details: " + this.user);
+        // console.log("Login triggered");
+        // console.log("Login Component: User details: " + this.user);
         this.userService.login(this.user.email, this.user.password)
             .then(status => {
                 setString("userID", String(this.user.userID));
@@ -58,18 +58,6 @@ export class LoginComponent implements OnInit {
                 alert("Unfortunately we could not find your account.")
             });
     }
-    /*login(user) {
-        console.log("Login triggered");
-        console.log("Login Component: User details: " + JSON.stringify(this.user));
-        this.userService.login(user)
-            .then(status => {
-                setString("userID", String(this.user.userID));
-                this.routerExtensions.navigate(["/home"], { clearHistory: true });
-            }, err => {
-                this.clearFields();
-                alert("Unfortunately we could not find your account.")
-            });
-    }*/
 
     signUp() {
         this.userService.register(this.user.email, this.user.password)

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+import { User } from "../../shared/user.model";
 
 const firebase = require("nativescript-plugin-firebase");
 import { firestore } from "nativescript-plugin-firebase";
@@ -21,6 +22,7 @@ const assetsCollection = firestore.collection("assets");
     templateUrl: "./update.component.html"
 })
 export class UpdateDeleteComponent implements OnInit {
+    user = new User();
     createdDate: string;
     changedDate: string;
     changedBy: string;
@@ -29,6 +31,8 @@ export class UpdateDeleteComponent implements OnInit {
     currentMonth: number = new Date().getMonth() + 1;
     currentYear: number = new Date().getFullYear();
     todaysDate = String(this.currentYear) + "-" + String(this.currentMonth) + "-" + String(this.currentDay);
+    @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
+    assetId = String(this.assetIDTextField);
 
     listPickerCondition: Array<string> = ["Please select a condition...",
                                           "A - Perfect",
@@ -41,9 +45,6 @@ export class UpdateDeleteComponent implements OnInit {
                                        "Down"];
     condition: number = 0;
     status: number = 0;
-    @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
-    assetId = String(this.assetIDTextField);
-    db: any;
 
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions
@@ -57,9 +58,7 @@ export class UpdateDeleteComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
-        firebase.getCurrentUser()
-            .then(user => console.log("User uid: " + user.uid))
-            .catch(error => console.log("Error getting current user: " + error));
+
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -76,6 +75,10 @@ export class UpdateDeleteComponent implements OnInit {
     }
 
     update(): void {
+        firebase.getCurrentUser()
+            .then(this.user)
+            .catch(error => console.log("Error getting current user: " + error));
+        
         if (this.assetId === "") {
             alert("Enter a valid AssetId");
 
@@ -93,30 +96,21 @@ export class UpdateDeleteComponent implements OnInit {
 
             return;
         }
-        const assetDocument = assetsCollection.doc(this.assetId);
 
-        /*console.log("Asset Id: " + this.assetId);
+        console.log("Asset Id: " + this.assetId);
         console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
         console.log("Asset Status: " + this.listPickerStatus[this.status]);
+        console.log("Asset Created Date: " + this.todaysDate);
         console.log("Asset Changed Date: " + this.todaysDate);
-        console.log("Asset Changed By: " + this.changedBy);*/
-
+        console.log("Asset Changed By: " + this.user);
+        
+        const assetDocument = assetsCollection.doc(this.assetId);
         assetDocument.update({
             asset_Condition: this.listPickerCondition[this.condition],
             asset_Status: this.listPickerStatus[this.status],
             asset_ChangedDate: this.todaysDate,
-            asset_ChangedBy: firebase.user.uid
+            asset_ChangedBy: this.user
         });
-
-        /* assetsCollection.doc(this.assetId).set({
-            asset_ID: this.assetId,
-            asset_Condition: this.listPickerCondition[this.condition],
-            asset_Status: this.listPickerStatus[this.status],
-            asset_CreatedDate: this.todaysDate,
-            asset_ChangedDate: this.todaysDate,
-            asset_ChangedBy: firebase.user.uid,
-            asset_IsDeleted: "false"
-        }); */
 
         console.log("Update Button Pressed");
         alert("Asset Update Submitted");

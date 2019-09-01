@@ -7,27 +7,17 @@ import { HomeComponent } from "./home/home.component";
 import { CreateNewComponent } from "./create/create.component";
 import { UpdateDeleteComponent } from "./update/update.component";
 import { ReportComponent } from "./report/report.component";
-import { SettingsComponent } from "./settings/settings.component";
-import { SearchComponent } from "./search/search.component";
 
 import { AuthGuard } from "./auth-guard.service";
 
 export const routes: Routes = [
-    // { path: "", component: LoginComponent },
-    { path: "", component: HomeComponent },
+    { path: "", component: LoginComponent },
+    // { path: "", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "home", component: HomeComponent },
     { path: "create", component: CreateNewComponent },
     { path: "update", component: UpdateDeleteComponent },
-    { path: "report", component: ReportComponent },
-    { path: "settings", component: SettingsComponent },
-    { path: "search", component: SearchComponent }
-    /*{ path: "", redirectTo: "/home", pathMatch: "full" },
-    { path: "home", loadChildren: "~/app/home/home.module#HomeModule" },
-    { path: "browse", loadChildren: "~/app/browse/browse.module#BrowseModule" },
-    { path: "search", loadChildren: "~/app/search/search.module#SearchModule" },
-    { path: "featured", loadChildren: "~/app/featured/featured.module#FeaturedModule" },
-    { path: "settings", loadChildren: "~/app/settings/settings.module#SettingsModule" }*/
+    { path: "report", component: ReportComponent }
 ];
 
 export const navigatableComponents = [
@@ -35,13 +25,11 @@ export const navigatableComponents = [
     HomeComponent,
     CreateNewComponent,
     UpdateDeleteComponent,
-    ReportComponent,
-    SettingsComponent,
-    SearchComponent
+    ReportComponent
 ];
 
 export const authProviders = [
-                               AuthGuard
+    AuthGuard
 ];
 
 @NgModule({

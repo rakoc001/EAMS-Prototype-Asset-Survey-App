@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+import { User } from "../../shared/user.model";
 
-const firebase = require("nativescript-plugin-firebase");
+// const firebase = require("nativescript-plugin-firebase");
 import { firestore } from "nativescript-plugin-firebase";
 const assetsCollection = firestore.collection("assets");
 
@@ -16,15 +16,6 @@ const assetsCollection = firestore.collection("assets");
 * Note that this simply points the path to the page module file. If you move the page, you need to update the route too.
 *************************************************************/
 
-/*interface DataItem{
-    asset_Id: string;
-    asset_Condition: string;
-    asset_Status: string;
-    asset_CreatedDate: string;
-    asset_ChangedDate: string;
-    asset_ChangedBy: string;
-    asset_isDeleted: boolean;
-}*/
 
 @Component({
     selector: "Report",
@@ -32,6 +23,8 @@ const assetsCollection = firestore.collection("assets");
     templateUrl: "./report.component.html"
 })
 export class ReportComponent implements OnInit {
+    user = new User();
+    
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
     
@@ -65,15 +58,12 @@ export class ReportComponent implements OnInit {
         const assetDocument = assetsCollection.where("documentRef", "==", this.assetId);
         assetDocument
             .get()
-            ; /*
-        DataItem[] = [{ asset_Id: assetDocument.asset_ID,
-                               asset_Condition: assetDocument.asset_Condition,
-                               asset_Status: assetDocument.asset_Status,
-                               asset_CreatedDate: assetDocument.asset_CreatedDate,
-                               asset_ChangedDate: assetDocument.asset_ChangedDate,
-                               asset_ChangedBy: assetDocument.asset_ChangedBy,
-                               asset_isDeleted: assetDocument.asset_isDeleted }
-            ];*/
-    }
+            .then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    console.log(`Output from query: ${doc.id} => ${JSON.stringify(doc.data())}`);
+                });
+            });
+            
 
+    }
 }

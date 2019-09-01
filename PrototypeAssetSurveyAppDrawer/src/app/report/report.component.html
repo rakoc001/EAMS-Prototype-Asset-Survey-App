@@ -6,41 +6,43 @@
     <Label class="action-bar-title" text="Create/View Reports"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, *" class="report-form">
-    <ScrollView>
-        <StackLayout>
-            <GridLayout class="report-form-element">
-                <TextField #assetIDTextField [(ngModel)]="assetId" hint="Search by Asset ID"
-                    col="0"></TextField>
-            </GridLayout>
-            <GridLayout class="submit-form">
-                <Button text="Submit." (tap)="submit()"></Button>
-            </GridLayout>
-        </StackLayout>
-    </ScrollView>
-</GridLayout>
-
-<GridLayout rows="auto, *" class="report-output">
-    <ScrollView>
-        <ListView class="asset-details output" [items]="asset" style="height:1250px">
-            <ng-template let-asset="item">
-                <FlexboxLayout flexDirection="row" class="list-group-item">
-                    <Label [text]="asset.asset_Id" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                    <Label [text]="asset.asset_Condition" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                    <Label [text]="asset.asset_Status" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                    <Label [text]="asset.asset_CreatedDate" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                    <Label [text]="asset.asset_ChangedDate" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                    <Label [text]="asset.asset_ChangedBy" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                    <Label [text]="asset.asset_isDeleted" class="list-group-item-heading"
-                        verticalAlignment="center" style="width: 60%"></Label>
-                </FlexboxLayout>
-            </ng-template>
-        </ListView>
-    </ScrollView>
-</GridLayout>
+<StackLayout>
+    <GridLayout rows="auto, *" class="report-form">
+        <ScrollView>
+            <StackLayout>
+                <GridLayout class="report-form-element">
+                    <TextField #assetIDTextField [(ngModel)]="assetId" hint="Search by Asset ID"
+                        col="0"></TextField>
+                </GridLayout>
+                <GridLayout class="submit-form">
+                    <Button text="Submit." (tap)="submit()"></Button>
+                </GridLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+    
+    <GridLayout rows="auto, *" class="report-output">
+        <ScrollView>
+            <ListView class="asset-details output" [items]="asset" style="height:1250px">
+                <ng-template let-asset="item">
+                    <FlexboxLayout flexDirection="row" class="list-group-item">
+                        <Label [text]="asset.asset_Id" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                        <Label [text]="asset.asset_Condition" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                        <Label [text]="asset.asset_Status" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                        <Label [text]="asset.asset_CreatedDate" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                        <Label [text]="asset.asset_ChangedDate" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                        <Label [text]="asset.asset_ChangedBy" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                        <Label [text]="asset.asset_isDeleted" class="list-group-item-heading"
+                            verticalAlignment="center" style="width: 60%"></Label>
+                    </FlexboxLayout>
+                </ng-template>
+            </ListView>
+        </ScrollView>
+    </GridLayout>
+</StackLayout>
