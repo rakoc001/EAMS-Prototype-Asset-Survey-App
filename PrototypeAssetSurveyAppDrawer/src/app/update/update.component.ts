@@ -58,7 +58,10 @@ export class UpdateDeleteComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
-
+       firebase.getCurrentUser()
+           .then(user => console.log("User email: " + user.email))
+           .catch(error => console.log("Error getting current user: " + error));
+   
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -75,10 +78,6 @@ export class UpdateDeleteComponent implements OnInit {
     }
 
     update(): void {
-        firebase.getCurrentUser()
-            .then(this.user)
-            .catch(error => console.log("Error getting current user: " + error));
-        
         if (this.assetId === "") {
             alert("Enter a valid AssetId");
 
@@ -125,10 +124,9 @@ export class UpdateDeleteComponent implements OnInit {
         }
 
         const assetDocument = assetsCollection.doc(this.assetId);
-
         assetDocument.update({
             asset_ChangedDate: this.todaysDate,
-            asset_ChangedBy: firebase.user.uid,
+            asset_ChangedBy: this.user,
             asset_IsDeleted: true
         });
 

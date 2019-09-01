@@ -31,6 +31,7 @@ export class CreateNewComponent implements OnInit {
     currentMonth: number = new Date().getMonth() + 1;
     currentYear: number = new Date().getFullYear();
     todaysDate = String(this.currentYear) + "-" + String(this.currentMonth) + "-" + String(this.currentDay);
+    
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
 
@@ -58,7 +59,10 @@ export class CreateNewComponent implements OnInit {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
-        
+       firebase.getCurrentUser()
+           .then(user => console.log("User email: " + user.email))
+           .catch(error => console.log("Error getting current user: " + error));
+       
     }
 
     onNavItemTap(navItemRoute: string): void {
@@ -75,10 +79,6 @@ export class CreateNewComponent implements OnInit {
     }
 
     submit() {
-        firebase.getCurrentUser()
-            .then(this.user)
-            .catch(error => console.error("Error getting current user: " + error));
-
         if (this.assetId === "") {
             alert("Enter a valid AssetId");
 
