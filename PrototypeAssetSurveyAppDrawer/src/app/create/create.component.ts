@@ -23,6 +23,7 @@ const assetsCollection = firestore.collection("assets");
 })
 export class CreateNewComponent implements OnInit {
     user = new User();
+    email = this.user.email;
     createdDate: string;
     changedDate: string;
     changedBy: string;
@@ -60,8 +61,8 @@ export class CreateNewComponent implements OnInit {
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
        firebase.getCurrentUser()
-           .then(user => console.log("User email: " + user.email))
-           .catch(error => console.log("Error getting current user: " + error));
+           .then((user) => { this.email = user.email; })
+           .catch(error => console.error("Error getting current user: " + error));
        
     }
 
@@ -102,7 +103,7 @@ export class CreateNewComponent implements OnInit {
         console.log("Asset Status: " + this.listPickerStatus[this.status]);
         console.log("Asset Created Date: " + this.todaysDate);
         console.log("Asset Changed Date: " + this.todaysDate);
-        console.log("Asset Changed By: " + this.user);
+        console.log("Asset Changed By: " + this.email);
 
         const assetDocument = assetsCollection.doc(this.assetId)
         assetDocument.set({
@@ -111,7 +112,7 @@ export class CreateNewComponent implements OnInit {
             asset_Status: this.listPickerStatus[this.status],
             asset_CreatedDate: this.todaysDate,
             asset_ChangedDate: this.todaysDate,
-            asset_ChangedBy: JSON.stringify(this.user),
+            asset_ChangedBy: this.email,
             asset_IsDeleted: "false"
         });
 
