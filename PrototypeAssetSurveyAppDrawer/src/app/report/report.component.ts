@@ -27,6 +27,11 @@ export class ReportComponent implements OnInit {
     
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
+
+    asset: { asset_Id: string, asset_Condition: string, asset_Status: string, asset_CreatedDate: string, asset_ChangedDate: string, asset_ChangedBy: string, asset_isDeleted: boolean }[] = [
+        
+    ];
+
     
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions) {
@@ -55,14 +60,21 @@ export class ReportComponent implements OnInit {
     }
 
     submit() {
-        const assetDocument = assetsCollection.where("documentRef", "==", this.assetId);
+        console.log("Searching for asset Id: " + this.assetId);
+        
+        const assetDocument = assetsCollection.doc(this.assetId);
+        
         assetDocument
             .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(doc => {
-                    console.log(`Output from query: ${doc.id} => ${JSON.stringify(doc.data())}`);
-                });
-            });
+            .then(doc => console.log(JSON.stringify(doc.data())));
+        // const assetDocument = assetsCollection.where("doc.id", "==", this.assetId);
+        // assetDocument
+        //     .get()
+        //     .then(querySnapshot => {
+        //         querySnapshot.forEach(doc => {
+        //             console.log(`Output from query: ${doc.id} => ${JSON.stringify(doc.data())}`);
+        //         });
+        //     });
             
 
     }
