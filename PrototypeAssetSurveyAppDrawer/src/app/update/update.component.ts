@@ -23,6 +23,7 @@ const assetsCollection = firestore.collection("assets");
 })
 export class UpdateDeleteComponent implements OnInit {
     user = new User();
+    email = this.user.email;
     createdDate: string;
     changedDate: string;
     changedBy: string;
@@ -59,8 +60,8 @@ export class UpdateDeleteComponent implements OnInit {
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
        firebase.getCurrentUser()
-           .then(user => console.log("User email: " + user.email))
-           .catch(error => console.log("Error getting current user: " + error));
+           .then((user) => { this.email = user.email; })
+           .catch(error => console.error("Error getting current user: " + error));
    
     }
 
@@ -101,14 +102,14 @@ export class UpdateDeleteComponent implements OnInit {
         console.log("Asset Status: " + this.listPickerStatus[this.status]);
         console.log("Asset Created Date: " + this.todaysDate);
         console.log("Asset Changed Date: " + this.todaysDate);
-        console.log("Asset Changed By: " + this.user);
+        console.log("Asset Changed By: " + this.email);
         
         const assetDocument = assetsCollection.doc(this.assetId);
         assetDocument.update({
             asset_Condition: this.listPickerCondition[this.condition],
             asset_Status: this.listPickerStatus[this.status],
             asset_ChangedDate: this.todaysDate,
-            asset_ChangedBy: this.user
+            asset_ChangedBy: this.email
         });
 
         console.log("Update Button Pressed");
