@@ -5,6 +5,9 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { User } from "../../shared/user.model";
 
+import { RadListView } from "nativescript-ui-listview";
+import { ObservableArray, ChangedData } from "tns-core-modules/data/observable-array";
+
 // const firebase = require("nativescript-plugin-firebase");
 import { firestore } from "nativescript-plugin-firebase";
 const assetsCollection = firestore.collection("assets");
@@ -28,11 +31,16 @@ export class ReportComponent implements OnInit {
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
 
-    asset: { asset_Id: string, asset_Condition: string, asset_Status: string, asset_CreatedDate: string, asset_ChangedDate: string, asset_ChangedBy: string, asset_isDeleted: boolean }[] = [
-        
-    ];
+    users = new ObservableArray();
 
-    
+    asset: Array<{ asset_Id: string,
+                   asset_Condition: string,
+                   asset_Status: string,
+                   asset_CreatedDate: string,
+                   asset_ChangedDate: string,
+                   asset_ChangedBy: string,
+                   asset_isDeleted: boolean }>;
+        
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions) {
         /* ***********************************************************
@@ -66,7 +74,8 @@ export class ReportComponent implements OnInit {
         
         assetDocument
             .get()
-            .then(doc => console.log(JSON.stringify(doc.data())));
+            .then(this.users.push(this.asset))
+            // .then(doc => console.log(JSON.stringify(doc.data())));
         // const assetDocument = assetsCollection.where("doc.id", "==", this.assetId);
         // assetDocument
         //     .get()
