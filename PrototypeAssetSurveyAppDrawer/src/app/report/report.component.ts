@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { User } from "../../shared/user.model";
 
-import { RadListView } from "nativescript-ui-listview";
+import { RadListView, ListViewLinearLayout, ListViewScrollDirection } from "nativescript-ui-listview";
 import { ObservableArray, ChangedData } from "tns-core-modules/data/observable-array";
 
 // const firebase = require("nativescript-plugin-firebase");
-import { firestore } from "nativescript-plugin-firebase";
+import { firestore, query } from "nativescript-plugin-firebase";
 const assetsCollection = firestore.collection("assets");
 
 /* ***********************************************************
@@ -26,21 +26,14 @@ const assetsCollection = firestore.collection("assets");
     templateUrl: "./report.component.html"
 })
 export class ReportComponent implements OnInit {
+    public dataArray = [];
+
     user = new User();
     
+
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
 
-    users = new ObservableArray();
-
-    asset: Array<{ asset_Id: string,
-                   asset_Condition: string,
-                   asset_Status: string,
-                   asset_CreatedDate: string,
-                   asset_ChangedDate: string,
-                   asset_ChangedBy: string,
-                   asset_isDeleted: boolean }>;
-        
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions) {
         /* ***********************************************************
@@ -72,19 +65,8 @@ export class ReportComponent implements OnInit {
         
         const assetDocument = assetsCollection.doc(this.assetId);
         
-        assetDocument
-            .get()
-            .then(this.users.push(this.asset))
-            // .then(doc => console.log(JSON.stringify(doc.data())));
-        // const assetDocument = assetsCollection.where("doc.id", "==", this.assetId);
-        // assetDocument
-        //     .get()
-        //     .then(querySnapshot => {
-        //         querySnapshot.forEach(doc => {
-        //             console.log(`Output from query: ${doc.id} => ${JSON.stringify(doc.data())}`);
-        //         });
-        //     });
-            
-
+        assetDocument.get().then((doc) => {this.dataArray.push(doc.data);
+                         console.info(this.dataArray);
+        });
     }
 }

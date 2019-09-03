@@ -23,7 +23,7 @@
     
     <GridLayout rows="auto, *" class="report-output">
         <ScrollView>
-            <RadListView class="asset-details output" [items]="users | async" style="height:1250px">
+            <RadListView class="asset-details output" [items]="dataArray" style="height:1250px">
                 <ng-template let-asset="item">
                     <FlexboxLayout flexDirection="row" class="list-group-item">
                         <Label [text]="asset.asset_Id" class="list-group-item-heading"
