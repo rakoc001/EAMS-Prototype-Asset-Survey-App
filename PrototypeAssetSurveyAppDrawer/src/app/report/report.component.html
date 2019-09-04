@@ -14,6 +14,26 @@
                     <TextField #assetIDTextField [(ngModel)]="assetId" hint="Search by Asset ID"
                         col="0"></TextField>
                 </GridLayout>
+                <RadListView class="asset-details output" [items]="assetArray" style="height:1250px">
+                    <ng-template let-asset="item">
+                        <FlexboxLayout flexDirection="row" class="list-group-item">
+                            <Label [text]="asset.asset_Id" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                            <Label [text]="asset.asset_Condition" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                            <Label [text]="asset.asset_Status" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                            <Label [text]="asset.asset_CreatedDate" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                            <Label [text]="asset.asset_ChangedDate" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                            <Label [text]="asset.asset_ChangedBy" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                            <Label [text]="asset.asset_isDeleted" class="list-group-item-heading"
+                                verticalAlignment="center" style="width: 60%"></Label>
+                        </FlexboxLayout>
+                    </ng-template>
+                </RadListView>
                 <GridLayout class="submit-form">
                     <Button text="Submit." (tap)="submit()"></Button>
                 </GridLayout>
@@ -23,26 +43,7 @@
     
     <GridLayout rows="auto, *" class="report-output">
         <ScrollView>
-            <RadListView class="asset-details output" [items]="dataArray" style="height:1250px">
-                <ng-template let-asset="item">
-                    <FlexboxLayout flexDirection="row" class="list-group-item">
-                        <Label [text]="asset.asset_Id" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                        <Label [text]="asset.asset_Condition" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                        <Label [text]="asset.asset_Status" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                        <Label [text]="asset.asset_CreatedDate" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                        <Label [text]="asset.asset_ChangedDate" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                        <Label [text]="asset.asset_ChangedBy" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                        <Label [text]="asset.asset_isDeleted" class="list-group-item-heading"
-                            verticalAlignment="center" style="width: 60%"></Label>
-                    </FlexboxLayout>
-                </ng-template>
-            </RadListView>
+            
         </ScrollView>
     </GridLayout>
 </StackLayout>
