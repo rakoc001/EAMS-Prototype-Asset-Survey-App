@@ -17,19 +17,19 @@
                 <RadListView class="asset-details output" [items]="assetArray" style="height:1250px">
                     <ng-template let-asset="item">
                         <FlexboxLayout flexDirection="row" class="list-group-item">
-                            <Label [text]="asset.asset_Id" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_Id" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
-                            <Label [text]="asset.asset_Condition" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_Condition" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
-                            <Label [text]="asset.asset_Status" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_Status" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
-                            <Label [text]="asset.asset_CreatedDate" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_CreatedDate" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
-                            <Label [text]="asset.asset_ChangedDate" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_ChangedDate" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
-                            <Label [text]="asset.asset_ChangedBy" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_ChangedBy" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
-                            <Label [text]="asset.asset_isDeleted" class="list-group-item-heading"
+                            <Label [text]="assetArray.asset_isDeleted" class="list-group-item-heading"
                                 verticalAlignment="center" style="width: 60%"></Label>
                         </FlexboxLayout>
                     </ng-template>
@@ -38,12 +38,6 @@
                     <Button text="Submit." (tap)="submit()"></Button>
                 </GridLayout>
             </StackLayout>
-        </ScrollView>
-    </GridLayout>
-    
-    <GridLayout rows="auto, *" class="report-output">
-        <ScrollView>
-            
         </ScrollView>
     </GridLayout>
 </StackLayout>
