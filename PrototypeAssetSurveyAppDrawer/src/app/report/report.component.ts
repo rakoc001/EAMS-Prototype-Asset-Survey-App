@@ -1,15 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { User } from "../../shared/user.model";
 
-import { RadListView, ListViewLinearLayout, ListViewScrollDirection } from "nativescript-ui-listview";
-import { ObservableArray, ChangedData } from "tns-core-modules/data/observable-array";
-
 // const firebase = require("nativescript-plugin-firebase");
-import { firestore, query } from "nativescript-plugin-firebase";
+import { firestore } from "nativescript-plugin-firebase";
 const assetsCollection = firestore.collection("assets");
 
 /* ***********************************************************
@@ -19,18 +16,16 @@ const assetsCollection = firestore.collection("assets");
 * Note that this simply points the path to the page module file. If you move the page, you need to update the route too.
 *************************************************************/
 
-
 @Component({
     selector: "Report",
     moduleId: module.id,
     templateUrl: "./report.component.html"
 })
 export class ReportComponent implements OnInit {
-    public dataArray = [];
+    dataArray = [];
 
     user = new User();
     
-
     @ViewChild("assetIDTextField", { static: true }) assetIDTextField: ElementRef;
     assetId = String(this.assetIDTextField);
 
@@ -64,9 +59,10 @@ export class ReportComponent implements OnInit {
         console.log("Searching for asset Id: " + this.assetId);
         
         const assetDocument = assetsCollection.doc(this.assetId);
-        
-        assetDocument.get().then((doc) => {this.dataArray.push(doc.data);
-                         console.info(this.dataArray);
+        console.log("AssetDocument: " + assetDocument);
+        assetDocument.get().then((doc) => {console.info("Doc: " + doc);
+                                           this.dataArray.push(doc.data);
+                                           console.info("dataArray: " + this.dataArray);
         });
     }
 }
