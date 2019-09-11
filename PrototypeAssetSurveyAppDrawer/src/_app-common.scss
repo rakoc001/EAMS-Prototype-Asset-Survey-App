@@ -147,3 +147,17 @@ $sidedrawer-list-icon-size: 20;
     height: 40;
     width: 40;
 }
+
+// Internet Connection Icon
+.connection-status-bar{
+    background-color: $background-dark;
+    padding: 10px 0px;
+    text-align: center;
+}
+
+.connection-icon {
+    font-family: "Roboto", sans-serif;
+    padding: 10px 0px 0px 20px;
+    font-size: 20pt;
+    color: black;
+}

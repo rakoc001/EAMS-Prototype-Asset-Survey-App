@@ -5,7 +5,9 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
-const firebase = require("nativescript-plugin-firebase");
+// const firebase = require("nativescript-plugin-firebase");
+import { InternetConnectionService } from "../shared/internet-connection-service";
+
 
 import { LoginService } from "../shared/";
 
@@ -15,12 +17,14 @@ import { LoginService } from "../shared/";
     templateUrl: "app.component.html"
 })
 export class AppComponent implements OnInit {
+
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
     constructor(private router: Router,
                 private routerExtensions: RouterExtensions,
-                private userService: LoginService) {
+                private userService: LoginService,
+                public internetConnection: InternetConnectionService) {
         // Use the component constructor to inject services.
     }
 
