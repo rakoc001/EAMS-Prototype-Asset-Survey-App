@@ -11,6 +11,7 @@ import { AppComponent } from "./app.component";
 
 import { LoginModule } from "../login/login.module";
 import { setStatusBarColors, BackendService, LoginService } from "../shared"
+import { InternetConnectionService } from "../shared/internet-connection-service";
 
 setStatusBarColors();
 
@@ -18,7 +19,8 @@ setStatusBarColors();
     providers: [
         authProviders,
         BackendService,
-        LoginService
+        LoginService,
+        InternetConnectionService
     ],
     bootstrap: [
         AppComponent

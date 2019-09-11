@@ -39,6 +39,10 @@ https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawe
                     <Label col="0" text="&#xf08b;" class="fa"></Label>
                     <Label col="1" text="Logout" class="p-r-10"></Label>
                 </GridLayout>
+                
+                <StackLayout>
+                    <Label class="connection-icon" text="{{(internetConnection.connectionStatus$ | async) ? 'app is online now' : 'app is offline now'}}"></Label>
+                </StackLayout>
 
             </StackLayout>
         </ScrollView>
