@@ -58,10 +58,10 @@ export class ReportComponent implements OnInit {
     }
 
     submit() {
-        // console.log("Searching for asset Id: " + this.assetId);
+        console.log("Searching for asset Id: " + this.assetId);
         
         const assetDocument = assetsCollection.doc(this.assetId);
-        // console.log("AssetDocument: " + JSON.stringify(assetDocument));
+        console.log("AssetDocument: " + JSON.stringify(assetDocument));
         assetDocument
                      .get()
                      .then((doc) => {this.dataArray.push(doc.data());
