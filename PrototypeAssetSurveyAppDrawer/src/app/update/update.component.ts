@@ -61,7 +61,7 @@ export class UpdateDeleteComponent implements OnInit {
         *************************************************************/
        firebase.getCurrentUser()
            .then((user) => { this.email = user.email; })
-           .catch(error => console.error("Error getting current user: " + error));
+           .catch((error: string) => console.error("Error getting current user: " + error));
    
     }
 
@@ -97,13 +97,13 @@ export class UpdateDeleteComponent implements OnInit {
             return;
         }
 
-        console.log("Asset Id: " + this.assetId);
-        console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
-        console.log("Asset Status: " + this.listPickerStatus[this.status]);
-        console.log("Asset Created Date: " + this.todaysDate);
-        console.log("Asset Changed Date: " + this.todaysDate);
-        console.log("Asset Changed By: " + this.email);
-        
+        // console.log("Asset Id: " + this.assetId);
+        // console.log("Asset Condition: " + this.listPickerCondition[this.condition]);
+        // console.log("Asset Status: " + this.listPickerStatus[this.status]);
+        // console.log("Asset Created Date: " + this.todaysDate);
+        // console.log("Asset Changed Date: " + this.todaysDate);
+        // console.log("Asset Changed By: " + this.email);
+        console.info("Updating asset: " + this.assetId);
         const assetDocument = assetsCollection.doc(this.assetId);
         assetDocument.update({
             asset_Condition: this.listPickerCondition[this.condition],
@@ -123,7 +123,7 @@ export class UpdateDeleteComponent implements OnInit {
 
             return;
         }
-
+        console.info("Deleting asset: " + this.assetId);
         const assetDocument = assetsCollection.doc(this.assetId);
         assetDocument.update({
             asset_ChangedDate: this.todaysDate,
