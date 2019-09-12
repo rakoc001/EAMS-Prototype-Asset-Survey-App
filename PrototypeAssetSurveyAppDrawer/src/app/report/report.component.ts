@@ -7,7 +7,7 @@ import { User } from "../../shared/user.model";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 
-// const firebase = require("nativescript-plugin-firebase");
+const firebase = require("nativescript-plugin-firebase");
 import { firestore } from "nativescript-plugin-firebase";
 const assetsCollection = firestore.collection("assets");
 

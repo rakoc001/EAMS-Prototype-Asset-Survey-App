@@ -5,7 +5,7 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { User } from "../../shared/user.model";
 
-const firebase = require("nativescript-plugin-firebase");
+const firebase = require ("nativescript-plugin-firebase");
 import { firestore } from "nativescript-plugin-firebase";
 const assetsCollection = firestore.collection("assets");
 
@@ -56,13 +56,13 @@ export class CreateNewComponent implements OnInit {
         *************************************************************/
     }
     
-    ngOnInit(){
+    ngOnInit() {
         /* ***********************************************************
         * Use the "ngOnInit" handler to initialize data for this component.
         *************************************************************/
        firebase.getCurrentUser()
            .then((user) => { this.email = user.email; })
-           .catch(error => console.error("Error getting current user: " + error));
+           .catch((error) => console.error("Error getting current user: " + error));
        
     }
 
@@ -105,7 +105,7 @@ export class CreateNewComponent implements OnInit {
         console.log("Asset Changed Date: " + this.todaysDate);
         console.log("Asset Changed By: " + this.email);
 
-        const assetDocument = assetsCollection.doc(this.assetId)
+        const assetDocument = assetsCollection.doc(this.assetId);
         assetDocument.set({
             asset_ID: this.assetId,
             asset_Condition: this.listPickerCondition[this.condition],
